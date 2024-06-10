@@ -1,6 +1,6 @@
 package com.saha.amit.service;
 
-import com.saha.amit.dto.user.UserDto;
+import com.saha.amit.dto.UserDto;
 import com.saha.amit.entity.User;
 import com.saha.amit.exception.CustomException;
 import com.saha.amit.exception.UserNoFoundException;
@@ -50,9 +50,9 @@ public class UserService {
         return userDto;
     }
 
-    public List<UserDto> findByPhoneNumberLike(String phoneNumber){
+    public List<UserDto> findByPhoneNumberContaining(String phoneNumber){
         List<UserDto> userDtoList = new ArrayList<>();
-        userRepository.findByPhoneNumberLike(phoneNumber).forEach(user -> {
+        userRepository.findByPhoneNumberContaining(phoneNumber).forEach(user -> {
             UserDto userDto = MapperClass.getUserDto(user);
             userDtoList.add(userDto);
         });
@@ -61,9 +61,9 @@ public class UserService {
         return  userDtoList;
     }
 
-    public List<UserDto> findByEmailLike(String email){
+    public List<UserDto> findByEmailContaining(String email){
         List<UserDto> userDtoList = new ArrayList<>();
-        userRepository.findByEmailLike(email).forEach(user -> {
+        userRepository.findByEmailContaining(email).forEach(user -> {
             UserDto userDto = MapperClass.getUserDto(user);
             userDtoList.add(userDto);
         });

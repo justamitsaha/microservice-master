@@ -1,13 +1,9 @@
 package com.saha.amit.client;
 
-import com.saha.amit.dto.user.UserDto;
-import jakarta.validation.Valid;
-import org.apache.catalina.User;
+import com.saha.amit.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -30,6 +26,5 @@ public class UserClient {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(UserDto.class);
-
     }
 }

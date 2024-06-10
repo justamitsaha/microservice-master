@@ -1,7 +1,6 @@
 package com.saha.amit.controller;
 
-import com.saha.amit.dto.product.ProductDto;
-import com.saha.amit.entity.Product;
+import com.saha.amit.dto.ProductDto;
 import com.saha.amit.service.ProductService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

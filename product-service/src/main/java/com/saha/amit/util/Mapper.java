@@ -1,6 +1,6 @@
 package com.saha.amit.util;
 
-import com.saha.amit.dto.product.ProductDto;
+import com.saha.amit.dto.ProductDto;
 import com.saha.amit.entity.Product;
 
 public class Mapper {

@@ -1,6 +1,6 @@
 package com.saha.amit.util;
 
-import com.saha.amit.dto.user.UserDto;
+import com.saha.amit.dto.UserDto;
 import com.saha.amit.entity.User;
 
 public class MapperClass {

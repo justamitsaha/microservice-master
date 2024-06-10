@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface UserRepository  extends JpaRepository<User,Integer> {
 
-    public List<User> findByPhoneNumberLike(String phoneNumber);
+    public List<User> findByPhoneNumberContaining(String phoneNumber);
 
-    public List<User> findByEmailLike(String email);
+    public List<User> findByEmailContaining(String email);
 }

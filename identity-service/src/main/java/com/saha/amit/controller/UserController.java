@@ -1,7 +1,7 @@
 package com.saha.amit.controller;
 
 import com.saha.amit.dto.ErrorResponseDto;
-import com.saha.amit.dto.user.UserDto;
+import com.saha.amit.dto.UserDto;
 import com.saha.amit.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -112,11 +112,11 @@ public class UserController {
             )
     }
     )
-    @GetMapping("findByPhoneNumberLike")
+    @GetMapping("findByPhoneNumberContaining")
     public ResponseEntity<List<UserDto>> findByPhoneNumberLike(@RequestParam
                                                                @Pattern(regexp = "(^$|[0-9]{5,10})", message = "At least enter 6 digits to search")
                                                                String phoneNumber) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findByPhoneNumberLike(phoneNumber));
+        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findByPhoneNumberContaining(phoneNumber));
     }
 
 
@@ -145,11 +145,11 @@ public class UserController {
             )
     }
     )
-    @GetMapping("findByEmailLike/{email}")
-    public ResponseEntity<List<UserDto>> findByEmailLike(@PathVariable
+    @GetMapping("findByEmailContaining/{email}")
+    public ResponseEntity<List<UserDto>> findByEmailContaining(@PathVariable
                                                          @Email(message = "Please provide valid Email")
                                                          String email) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findByEmailLike(email));
+        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findByEmailContaining(email));
     }
 
 

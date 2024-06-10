@@ -1,10 +1,8 @@
 package com.saha.amit;
 
 import com.github.javafaker.Faker;
-import com.saha.amit.dto.product.ProductDto;
-import com.saha.amit.entity.Product;
+import com.saha.amit.dto.ProductDto;
 import com.saha.amit.record.AccountsContactInfoDto;
-import com.saha.amit.repository.ProductRepository;
 import com.saha.amit.service.ProductService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

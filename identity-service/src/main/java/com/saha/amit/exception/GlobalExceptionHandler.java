@@ -1,6 +1,8 @@
 package com.saha.amit.exception;
 
 import com.saha.amit.dto.ErrorResponseDto;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    Log log = LogFactory.getLog(GlobalExceptionHandler.class);
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -66,7 +70,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception exception,
                                                                   WebRequest webRequest) {
-        System.out.println("inside global exception");
+        log.error("Inside handleGlobalException -->"+ exception.getMessage()  +" --"+exception.getClass());
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto();
         errorResponseDTO.setErrorMessage(exception.getMessage());
         errorResponseDTO.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,7 +82,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(HttpClientErrorException.BadRequest.class)
     public ResponseEntity<ErrorResponseDto> badRequest(Exception exception,
                                                        WebRequest webRequest) {
-        System.out.println("inside global exception");
+        log.error("Inside badRequest -->"+ exception.getMessage()  +" --"+exception.getClass());
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto();
         errorResponseDTO.setErrorMessage(exception.getMessage());
         errorResponseDTO.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR);
