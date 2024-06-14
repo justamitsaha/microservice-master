@@ -64,7 +64,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>justamitsaha/${project.artifactId}:s4</name>
+                        <name>justamitsaha/${project.artifactId}:config_server1</name>
                     </image>
                 </configuration>
             </plugin>
