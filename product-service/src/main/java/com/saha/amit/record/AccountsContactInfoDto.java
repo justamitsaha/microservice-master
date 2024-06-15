@@ -10,7 +10,7 @@ public class AccountsContactInfoDto{
 
     private String message;
     private Map<String, String> contactDetails;
-    private List<String> onCallSupportString;
+    private List<String> onCallSupport;
 
     public String getMessage() {
         return message;
@@ -28,11 +28,11 @@ public class AccountsContactInfoDto{
         this.contactDetails = contactDetails;
     }
 
-    public List<String> getOnCallSupportString() {
-        return onCallSupportString;
+    public List<String> getOnCallSupport() {
+        return onCallSupport;
     }
 
-    public void setOnCallSupportString(List<String> onCallSupportString) {
-        this.onCallSupportString = onCallSupportString;
+    public void setOnCallSupport(List<String> onCallSupport) {
+        this.onCallSupport = onCallSupport;
     }
 }
