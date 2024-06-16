@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "33fdd532-cede-4b00-85f2-48c9b1bb20ac",
+		"name": "mocroservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12621221"
+	},
+	"item": [
+		{
+			"name": "Local-Server",
+			"item": [
+				{
+					"name": "Identity-service",
+					"item": [
+						{
+							"name": "User_create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev007@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/user/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_by_id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/user/findById/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_by_email",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/user/findByEmailContaining/007@mailinator.com"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_By_PhoneNumber",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/user/findByPhoneNumberContaining?phoneNumber=999999999",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"findByPhoneNumberContaining"
+									],
+									"query": [
+										{
+											"key": "phoneNumber",
+											"value": "999999999"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product-Service",
+					"item": [
+						{
+							"name": "Configuration-service",
+							"item": [
+								{
+									"name": "Configuration-API-info",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://localhost:8081/configuration/api-info"
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-enviornment",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://localhost:8081/configuration/env-variables"
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-Contact-class",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://localhost:8081/configuration/contact-info"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "SaveProduct",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "userId",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8081/product/save"
+							},
+							"response": []
+						},
+						{
+							"name": "Search_product_by_price",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8081/product/search/2000/5000"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_producyt_by_id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8081/product/findById/101"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "Actuator-ConfigServer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "http://localhost:8071/actuator/refresh"
+							},
+							"response": []
+						},
+						{
+							"name": "Actuator-Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "http://localhost:8081/actuator/refresh"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ConfigServer",
+					"item": [
+						{
+							"name": "Config-Get_properties",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8071/product-service/default"
+							},
+							"response": []
+						},
+						{
+							"name": "Encrypt",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "johns@mailinator.com",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": "http://localhost:8071/encrypt"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Local-Server-ApiGateway",
+			"item": [
+				{
+					"name": "Identity-service",
+					"item": [
+						{
+							"name": "User_create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev007@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/identity/user/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_by_id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/user/findById/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_by_email",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/user/findByEmailContaining/007@mailinator.com"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_By_PhoneNumber",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/user/findByPhoneNumberContaining?phoneNumber=999999999",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"findByPhoneNumberContaining"
+									],
+									"query": [
+										{
+											"key": "phoneNumber",
+											"value": "999999999"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product-Service",
+					"item": [
+						{
+							"name": "Configuration-service",
+							"item": [
+								{
+									"name": "Configuration-API-info",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://localhost:8081/configuration/api-info"
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-enviornment",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://localhost:8081/configuration/env-variables"
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-Contact-class",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://localhost:8081/configuration/contact-info"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "SaveProduct",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "userId",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8081/product/save"
+							},
+							"response": []
+						},
+						{
+							"name": "Search_product_by_price",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8081/product/search/2000/5000"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_producyt_by_id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8081/product/findById/101"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "Actuator-ConfigServer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "http://localhost:8071/actuator/refresh"
+							},
+							"response": []
+						},
+						{
+							"name": "Actuator-Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "http://localhost:8081/actuator/refresh"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ConfigServer",
+					"item": [
+						{
+							"name": "Config-Get_properties",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8071/product-service/default"
+							},
+							"response": []
+						},
+						{
+							"name": "Encrypt",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "johns@mailinator.com",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": "http://localhost:8071/encrypt"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
