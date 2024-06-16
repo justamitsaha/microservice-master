@@ -78,6 +78,11 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -100,7 +105,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>justamitsaha/${project.artifactId}:config_server1</name>
+                        <name>justamitsaha/${project.artifactId}:discovery_service_gateway_2</name>
                     </image>
                 </configuration>
             </plugin>
