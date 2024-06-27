@@ -14,16 +14,9 @@ public class RoutingConfiguration {
     public RouteLocator routingConfigurationBean(RouteLocatorBuilder routeLocatorBuilder) {
         return routeLocatorBuilder.routes()
                 .route(p -> p
-                        .path("/identity/**")
-                        .filters(gatewayFilterSpec -> gatewayFilterSpec.rewritePath("/identity/(?<segment>.*)","/${segment}"))
-                        .uri("lb:IDENTITY-SERVICE"))
+                        .path("/auth/**")
+                        .filters(gatewayFilterSpec -> gatewayFilterSpec.rewritePath("/auth/(?<segment>.*)","/identity/${segment}"))
+                        .uri("lb://IDENTITY-SERVICE"))
                 .build();
-
-//        return routeLocatorBuilder.routes()
-//                .route(p -> p
-//                        .path("/identity/**")
-//                        .filters( gatewayFilterSpec -> gatewayFilterSpec.rewritePath("/identity/(?<segment>.*)","/${segment}"))
-//                        .uri("lb://IDENTITY-SERVICE"))
-//                .build();
     }
 }

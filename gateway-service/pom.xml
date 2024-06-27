@@ -17,7 +17,6 @@
     <name>gateway-service</name>
     <description>Gateway server for MicroserviceMaster</description>
 
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
