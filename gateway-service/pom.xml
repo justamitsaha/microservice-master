@@ -64,6 +64,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>justamitsaha/${project.artifactId}:discovery_service_gateway_2</name>
+                    </image>
+                </configuration>
             </plugin>
         </plugins>
     </build>

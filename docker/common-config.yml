@@ -1,0 +1,34 @@
+services:
+  network-deploy-service:
+    networks:
+      -micro-service
+
+  microservice-base-config:
+    extends:
+      service: network-deploy-service
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+  #    environment:
+  #      SPRING_RABBITMQ_HOST: "rabbit"
+
+  discovery-gateway-dependency:
+    extends:
+      service: microservice-base-config
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-service:8081/discovery/eureka/
+
+
+  config-server-config-dependency:
+    extends:
+      service: discovery-gateway-dependency
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: configserver:http://config-server:8071/
