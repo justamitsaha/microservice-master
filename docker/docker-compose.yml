@@ -1,0 +1,97 @@
+services:
+
+#  rabbit:
+#    image: rabbitmq:3.13-management
+#    hostname: rabbitmq
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    healthcheck:
+#      test: rabbitmq-diagnostics check_port_connectivity
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#      start_period: 5s
+#    extends:
+#      file: common-config.yml
+#      service: network-deploy-service
+
+  config-server:
+    image: "justamitsaha/config-server:discovery_service_gateway_2"
+    container_name: "config-ms"
+    ports:
+      - "8071:8071"
+#    depends_on:
+#      rabbit:
+#        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "config-server"
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+  discovery-service:
+    image: "justamitsaha/discovery-service:discovery_service_gateway_2"
+    container_name: discovery-ms
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: "curl --fail --silent http://localhost:8081/discovery/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+    environment:
+      SPRING_APPLICATION_NAME: "discovery-service"
+
+  identity-service:
+    image: "justamitsaha/identity-service:discovery_service_gateway_2"
+    container_name: "identity-ms"
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: "identity-service"
+    extends:
+      file: common-config.yml
+      service: discovery-gateway-dependency
+
+  product-service:
+    image: "justamitsaha/product-service:discovery_service_gateway_2"
+    container_name: "product-ms"
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: "product-service"
+    extends:
+      file: common-config.yml
+      service: config-server-config-dependency
+
+  gateways-service:
+    image: "justamitsaha/gateway-service:discovery_service_gateway_2"
+    container_name: gateways-service-ms
+    ports:
+      - "8080:8080"
+    depends_on:
+      identity-service:
+        condition: service_healthy
+      product-service:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gateways-service"
+    extends:
+      file: common-config.yml
+      service: discovery-gateway-dependency
+
+
+networks:
+  micro-service:
+    driver: "bridge"
