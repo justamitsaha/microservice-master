@@ -5,4 +5,7 @@ Also it exposes configuration service by reading properties file
 
 mvn spring-boot:build-image
 
+mvn clean
+mvn clean install
+
 

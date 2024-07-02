@@ -12,15 +12,17 @@
 
     <groupId>com.saha.amit</groupId>
     <artifactId>identity-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${project.version}</version>
     <packaging>jar</packaging>
     <name>identity-service</name>
+    <description>Authentication server for MicroserviceMaster</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>2023.0.2</spring-cloud.version>
+        <project.version>999</project.version>
     </properties>
 
     <dependencies>

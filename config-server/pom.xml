@@ -10,14 +10,19 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>config-server</artifactId>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>2023.0.2</spring-cloud.version>
+        <project.version>999</project.version>
     </properties>
+
+    <groupId>com.saha.amit</groupId>
+    <artifactId>config-server</artifactId>
+    <version>${project.version}</version>
+    <name>config-service</name>
+    <description>Config service for Microservice master</description>
 
     <dependencies>
         <dependency>

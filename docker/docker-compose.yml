@@ -17,7 +17,7 @@ services:
 #      service: network-deploy-service
 
   config-server:
-    image: "justamitsaha/config-server:discovery_service_gateway_2"
+    image: "justamitsaha/ms-config-server:1gateway"
     container_name: "config-ms"
     ports:
       - "8071:8071"
@@ -37,7 +37,7 @@ services:
       service: microservice-base-config
 
   discovery-service:
-    image: "justamitsaha/discovery-service:discovery_service_gateway_2"
+    image: "justamitsaha/ms-discovery-service:1gateway"
     container_name: discovery-ms
     ports:
       - "8081:8081"
@@ -54,7 +54,7 @@ services:
       SPRING_APPLICATION_NAME: "discovery-service"
 
   identity-service:
-    image: "justamitsaha/identity-service:discovery_service_gateway_2"
+    image: "justamitsaha/ms-identity-service:1gateway"
     container_name: "identity-ms"
     ports:
       - "8080:8080"
@@ -65,7 +65,7 @@ services:
       service: discovery-gateway-dependency
 
   product-service:
-    image: "justamitsaha/product-service:discovery_service_gateway_2"
+    image: "justamitsaha/ms-product-service:1gateway"
     container_name: "product-ms"
     ports:
       - "8080:8080"
@@ -76,7 +76,7 @@ services:
       service: config-server-config-dependency
 
   gateways-service:
-    image: "justamitsaha/gateway-service:discovery_service_gateway_2"
+    image: "justamitsaha/ms-gateway-service:1gateway"
     container_name: gateways-service-ms
     ports:
       - "8080:8080"
