@@ -17,7 +17,7 @@ services:
 #      service: network-deploy-service
 
   config-server:
-    image: "jsuatamitsaha/config-server:discovery_service_gateway_2"
+    image: "justamitsaha/config-server:discovery_service_gateway_2"
     container_name: "config-ms"
     ports:
       - "8071:8071"
@@ -37,12 +37,12 @@ services:
       service: microservice-base-config
 
   discovery-service:
-    image: "jsuatamitsaha/discovery-service:discovery_service_gateway_2"
-    container_name: eurekaserver-ms
+    image: "justamitsaha/discovery-service:discovery_service_gateway_2"
+    container_name: discovery-ms
     ports:
       - "8081:8081"
     healthcheck:
-      test: "curl --fail --silent localhost:8081/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent http://localhost:8081/discovery/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
@@ -54,7 +54,7 @@ services:
       SPRING_APPLICATION_NAME: "discovery-service"
 
   identity-service:
-    image: "jsuatamitsaha/identity-service:discovery_service_gateway_2"
+    image: "justamitsaha/identity-service:discovery_service_gateway_2"
     container_name: "identity-ms"
     ports:
       - "8080:8080"
@@ -65,7 +65,7 @@ services:
       service: discovery-gateway-dependency
 
   product-service:
-    image: "jsuatamitsaha/product-service:discovery_service_gateway_2"
+    image: "justamitsaha/product-service:discovery_service_gateway_2"
     container_name: "product-ms"
     ports:
       - "8080:8080"
@@ -76,7 +76,7 @@ services:
       service: config-server-config-dependency
 
   gateways-service:
-    image: "jsuatamitsaha/gateways-service:discovery_service_gateway_2"
+    image: "justamitsaha/gateway-service:discovery_service_gateway_2"
     container_name: gateways-service-ms
     ports:
       - "8080:8080"
