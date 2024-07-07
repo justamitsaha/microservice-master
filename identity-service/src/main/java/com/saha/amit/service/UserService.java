@@ -1,6 +1,7 @@
 package com.saha.amit.service;
 
 import com.saha.amit.dto.UserDto;
+import com.saha.amit.dto.UserProductList;
 import com.saha.amit.entity.User;
 import com.saha.amit.exception.CustomException;
 import com.saha.amit.exception.UserNoFoundException;
@@ -48,6 +49,15 @@ public class UserService {
         log.info("findById --> User details fetched from DB -->"+user.toString());
         log.info("findById --> User details response object -->"+userDto.toString());
         return userDto;
+    }
+
+    public UserProductList findUserProduct(String id){
+        UserProductList userProductList = new UserProductList();
+        var opt =userRepository.findById(Integer.parseInt(id));
+        User user = opt.orElseThrow(() ->new UserNoFoundException("User not Found"));
+        UserDto userDto = MapperClass.getUserDto(user);
+        userProductList.setUserDto(userDto);
+        return  userProductList;
     }
 
     public List<UserDto> findByPhoneNumberContaining(String phoneNumber){

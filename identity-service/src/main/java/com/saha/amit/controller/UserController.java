@@ -2,6 +2,7 @@ package com.saha.amit.controller;
 
 import com.saha.amit.dto.ErrorResponseDto;
 import com.saha.amit.dto.UserDto;
+import com.saha.amit.dto.UserProductList;
 import com.saha.amit.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -86,6 +87,13 @@ public class UserController {
     public ResponseEntity<UserDto> findById(@PathVariable String id) {
         return ResponseEntity.status(HttpStatus.FOUND).body(userService.findById(id));
     }
+
+    @GetMapping("findUserProduct/{id}")
+    public ResponseEntity<UserProductList> findUserProduct(@PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findUserProduct(id));
+    }
+
+
 
     @Operation(
             summary = "Fetch User Details REST API",

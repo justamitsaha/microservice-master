@@ -68,6 +68,10 @@ public class ProductService {
         return productRepository.findById(id).map(Mapper::getProductDto);
     }
 
+    public Flux<ProductDto> findByUserId(int id) {
+        return productRepository.findByUserId(id).map(Mapper::getProductDto);
+    }
+
     public Flux<ProductDto> findByCategory(String category) {
         return productRepository.findByCategory(category).map(Mapper::getProductDto);
     }

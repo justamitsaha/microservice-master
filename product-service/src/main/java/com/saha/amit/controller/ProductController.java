@@ -48,6 +48,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.FOUND).body(productService.findById(id));
     }
 
+    @GetMapping(value = "findByUserId/{userId}")
+    public ResponseEntity<Flux<ProductDto>> findByUserId(@PathVariable int userId) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(productService.findByUserId(userId));
+    }
+
     @GetMapping(value = "search/{category}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<Flux<ProductDto>> findByCategory(@PathVariable String category) {
         return ResponseEntity.status(HttpStatus.FOUND).body(productService.findByCategory(category).delayElements(Duration.ofMillis(500)));
