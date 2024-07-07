@@ -8,4 +8,9 @@ mvn spring-boot:build-image
 mvn clean
 mvn clean install
 
+docker build . -t justamitsaha/ms-product-service:1gateway
+
+docker push justamitsaha/ms-identity-service:1gateway
+
+
 

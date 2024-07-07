@@ -1,6 +1,9 @@
 #Start with a base image containing Java runtime
 FROM openjdk:17-jdk-slim as build
 
+# Install curl
+RUN apt-get update && apt-get install -y curl
+
 #Information around who maintains the image
 MAINTAINER justamitsaha@gmail.com
 
