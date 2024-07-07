@@ -1,53 +1,76 @@
 #!/bin/bash
 
-cd config-service/
-echo "Do you want to run config service?enter y/n"
-read user_action
+# Set the Docker image tag
+DOCKER_TAG="1gateway"
+
+echo "Current Path: $(pwd)"
+
+cd ../config-server || exit
+echo "Current Path: $(pwd)"
+
+read -p "Do you want to run config server? enter y/n --> " user_action
 if [ "$user_action" == "y" ]; then
     mvn clean install
-    java - jar config-service-1.0-SNAPSHOT.jar
+    docker build . -t justamitsaha/ms-config-server:$DOCKER_TAG
+    docker push justamitsaha/ms-config-server:$DOCKER_TAG
+    echo "Config server docker push completed"
 else
     echo "Skipping config server"
 fi
+cd ../
 
-cd ../discovery-service/
-echo "Do you want to run discovery service?enter y/n"
-read user_action
+cd discovery-service || exit
+echo "Current Path: $(pwd)"
+
+read -p "Do you want to run discovery service? enter y/n --> " user_action
 if [ "$user_action" == "y" ]; then
     mvn clean install
-    java - jar discovery-service-1.0-SNAPSHOT.jar
+    docker build . -t justamitsaha/ms-discovery-service:$DOCKER_TAG
+    docker push justamitsaha/ms-discovery-service:$DOCKER_TAG
+    echo "Discovery service docker push completed"
 else
-    echo "Skipping config server"
+    echo "Skipping discovery service"
 fi
+cd ../
 
-cd ../api-gate-way-service/
-echo "Do you want to run api gateway service?enter y/n"
-read user_action
+cd gateway-service || exit
+echo "Current Path: $(pwd)"
+
+read -p "Do you want to run gateway service? enter y/n --> " user_action
 if [ "$user_action" == "y" ]; then
     mvn clean install
-    java - jar api-gate-way-service-1.0-SNAPSHOT.jar
+    docker build . -t justamitsaha/ms-gateway-service:$DOCKER_TAG
+    docker push justamitsaha/ms-gateway-service:$DOCKER_TAG
+    echo "Gateway service docker push completed"
 else
-    echo "Skipping config server"
+    echo "Skipping gateway service"
 fi
+cd ../
 
-cd ../redis-cache-service/
-echo "Do you want to run redis-cache-service?enter y/n"
-read user_action
+cd identity-service || exit
+echo "Current Path: $(pwd)"
+
+read -p "Do you want to run identity service? enter y/n --> " user_action
 if [ "$user_action" == "y" ]; then
     mvn clean install
-    java - jar redis-cache-service-1.0-SNAPSHOT.jar
+    docker build . -t justamitsaha/ms-identity-service:$DOCKER_TAG
+    docker push justamitsaha/ms-identity-service:$DOCKER_TAG
+    echo "Identity service docker push completed"
 else
-    echo "Skipping config server"
+    echo "Skipping identity service"
 fi
+cd ../
 
-cd ../onboard-user-service/
-echo "Do you want to run onboard-user-service?enter y/n"
-read user_action
+cd product-service || exit
+echo "Current Path: $(pwd)"
+
+read -p "Do you want to run product service? enter y/n --> " user_action
 if [ "$user_action" == "y" ]; then
     mvn clean install
-    java - jar onboard-user-service-1.0-SNAPSHOT.jar
+    docker build . -t justamitsaha/ms-product-service:$DOCKER_TAG
+    docker push justamitsaha/ms-product-service:$DOCKER_TAG
+    echo "Product service docker push completed"
 else
-    echo "Skipping config server"
+    echo "Skipping product service"
 fi
-
-
+cd ../

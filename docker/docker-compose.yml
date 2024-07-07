@@ -42,7 +42,7 @@ services:
     ports:
       - "8081:8081"
     healthcheck:
-      test: "curl --fail --silent http://localhost:8081/discovery/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8081/discovery/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
@@ -53,11 +53,28 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "discovery-service"
 
+  gateway-service:
+    image: "justamitsaha/ms-gateway-service:1gateway"
+    container_name: gateway-service-ms
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: "gateway-service"
+    extends:
+      file: common-config.yml
+      service: discovery-gateway-dependency      
+
   identity-service:
     image: "justamitsaha/ms-identity-service:1gateway"
     container_name: "identity-ms"
     ports:
-      - "8080:8080"
+      - "8080"
+    healthcheck:
+      test: "curl --fail --silent http://gateway-service:8080/authentication/user/findById/1 | grep Amit || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "identity-service"
     extends:
@@ -68,28 +85,22 @@ services:
     image: "justamitsaha/ms-product-service:1gateway"
     container_name: "product-ms"
     ports:
-      - "8080:8080"
+      - "8080"
+    healthcheck:
+      test: "curl --fail --silent http://gateway-service:8080/product/findById/100 | grep Amit || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s      
+    depends_on:
+      identity-service:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "product-service"
     extends:
       file: common-config.yml
       service: config-server-config-dependency
 
-  gateways-service:
-    image: "justamitsaha/ms-gateway-service:1gateway"
-    container_name: gateways-service-ms
-    ports:
-      - "8080:8080"
-    depends_on:
-      identity-service:
-        condition: service_healthy
-      product-service:
-        condition: service_healthy
-    environment:
-      SPRING_APPLICATION_NAME: "gateways-service"
-    extends:
-      file: common-config.yml
-      service: discovery-gateway-dependency
 
 
 networks:

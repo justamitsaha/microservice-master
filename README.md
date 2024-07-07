@@ -24,9 +24,11 @@ docker build . -t justamitsaha/ms-product-service:1gateway
 docker push justamitsaha/ms-product-service:1gateway
 
 sudo docker container rm f3ae
-sudo docker rm $(sudo docker ps -a -q)  	remove all 
+sudo docker rm $(sudo docker ps -a -q)  	remove all  container
     -a: Includes all containers (not just running ones) in the output.
     -q: Only displays the container IDs, not the complete information about the containers.
+
+sudo docker rmi $(sudo docker images -q)    
 
 docker container exec -it  d0b4  /bin/bash
 
