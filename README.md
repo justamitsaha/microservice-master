@@ -8,9 +8,29 @@ mvn spring-boot:build-image
 mvn clean
 mvn clean install
 
-docker build . -t justamitsaha/ms-product-service:1gateway
+docker build . -t justamitsaha/ms-config-server:1gateway
+docker push justamitsaha/ms-config-server:1gateway
 
+docker build . -t justamitsaha/ms-discovery-service:1gateway
+docker push justamitsaha/ms-discovery-service:1gateway
+
+docker build . -t justamitsaha/ms-gateway-service:1gateway
+docker push justamitsaha/ms-gateway-service:1gateway
+
+docker build . -t justamitsaha/ms-identity-service:1gateway
 docker push justamitsaha/ms-identity-service:1gateway
+
+docker build . -t justamitsaha/ms-product-service:1gateway
+docker push justamitsaha/ms-product-service:1gateway
+
+sudo docker container rm f3ae
+sudo docker rm $(sudo docker ps -a -q)  	remove all 
+    -a: Includes all containers (not just running ones) in the output.
+    -q: Only displays the container IDs, not the complete information about the containers.
+
+docker container exec -it  d0b4  /bin/bash
+
+
 
 
 
