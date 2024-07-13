@@ -1,6 +1,6 @@
 package com.saha.amit.controller;
 
-import com.saha.amit.record.AccountsContactInfoDto;
+import com.saha.amit.record.CompanyContactInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -21,7 +21,7 @@ public class ConfigurationController {
     private Environment environment;
 
     @Autowired
-    private AccountsContactInfoDto accountsContactInfoDto;
+    private CompanyContactInfoDto companyContactInfoDto;
 
 
     @GetMapping("/api-info")
@@ -43,9 +43,9 @@ public class ConfigurationController {
     }
 
     @GetMapping("/contact-info")
-    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+    public ResponseEntity<CompanyContactInfoDto> getContactInfo() {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(accountsContactInfoDto);
+                .body(companyContactInfoDto);
     }
 }

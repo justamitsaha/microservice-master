@@ -42,7 +42,7 @@ if "%user_action%"=="y" (
     call  mvn clean install
     call docker build . -t justamitsaha/ms-gateway-service:%DOCKER_TAG%
     call docker push justamitsaha/ms-gateway-service:%DOCKER_TAG%
-    echo "Discovery service docker push completed"
+    echo "Gateway service docker push completed"
     cd ../
 ) else (
     echo "Skipping gateway-service"

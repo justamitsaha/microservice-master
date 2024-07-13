@@ -2,7 +2,7 @@ package com.saha.amit;
 
 import com.github.javafaker.Faker;
 import com.saha.amit.dto.ProductDto;
-import com.saha.amit.record.AccountsContactInfoDto;
+import com.saha.amit.record.CompanyContactInfoDto;
 import com.saha.amit.service.ProductService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +18,7 @@ import org.springframework.util.StreamUtils;
 
 import java.nio.charset.StandardCharsets;
 
-@EnableConfigurationProperties(value = {AccountsContactInfoDto.class})
+@EnableConfigurationProperties(value = {CompanyContactInfoDto.class})
 @SpringBootApplication
 public class ProductServiceApplication implements CommandLineRunner {
 

@@ -1,5 +1,6 @@
 package com.saha.amit.client;
 
+import com.saha.amit.dto.CompanyContactInfoDto;
 import com.saha.amit.dto.ProductDto;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,16 +22,35 @@ public class ProductClient {
     @Autowired
     private WebClient.Builder webBuilder;
 
+    public CompanyContactInfoDto getContactInfo() {
+        log.info("getContactInfo webclient "+productEndpoint + "contact-info");
+        try {
+            return webBuilder.build().
+                    get()
+                    .uri(productEndpoint + "contact-info")
+                    .retrieve()
+                    .bodyToMono(CompanyContactInfoDto.class)
+                    .block();
+        } catch (Exception e) {
+            log.error("Error in webclient getContactInfo --> " + e);
+        }
+        return null;
+    }
+
     public List<ProductDto> findByUserId(int userId) {
         log.info(productEndpoint + "findByUserId/{userId}");
-        return webBuilder.build().
-                get()
-                .uri(productEndpoint + "findByUserId/{userId}", userId)
-                .retrieve()
-                .bodyToFlux(ProductDto.class)
-                .collectList()
-                .block();
-
+        try {
+            return webBuilder.build().
+                    get()
+                    .uri(productEndpoint + "findByUserId/{userId}", userId)
+                    .retrieve()
+                    .bodyToFlux(ProductDto.class)
+                    .collectList()
+                    .block();
+        } catch (Exception e) {
+            log.error("Error in webclient findByUserId --> " + e);
+        }
+        return null;
     }
 
 }

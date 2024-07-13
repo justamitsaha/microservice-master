@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 @ConfigurationProperties(prefix = "accounts")
-public class AccountsContactInfoDto{
+public class CompanyContactInfoDto {
 
     private String message;
     private Map<String, String> contactDetails;

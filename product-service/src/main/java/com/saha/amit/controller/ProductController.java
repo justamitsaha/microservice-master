@@ -50,7 +50,7 @@ public class ProductController {
 
     @GetMapping(value = "findByUserId/{userId}")
     public ResponseEntity<Flux<ProductDto>> findByUserId(@PathVariable int userId) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(productService.findByUserId(userId));
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findByUserId(userId));
     }
 
     @GetMapping(value = "search/{category}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

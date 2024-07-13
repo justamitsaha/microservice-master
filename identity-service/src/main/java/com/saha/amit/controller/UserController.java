@@ -2,7 +2,7 @@ package com.saha.amit.controller;
 
 import com.saha.amit.dto.ErrorResponseDto;
 import com.saha.amit.dto.UserDto;
-import com.saha.amit.dto.UserProductList;
+import com.saha.amit.dto.UserCustomerContactInfo;
 import com.saha.amit.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 public class UserController {
+
+    Log log = LogFactory.getLog(UserController.class);
 
     UserService userService;
 
@@ -55,7 +59,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll() {
-        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
 
     @Operation(
@@ -85,12 +89,13 @@ public class UserController {
     )
     @GetMapping("findById/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable String id) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
 
-    @GetMapping("findUserProduct/{id}")
-    public ResponseEntity<UserProductList> findUserProduct(@PathVariable String id) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findUserProduct(id));
+    @GetMapping("getUserContactInfo/{id}")
+    public ResponseEntity<UserCustomerContactInfo> getUserContactInfo(@PathVariable String id) {
+        log.info("Inside getUserContactInfo " +id);
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserContactInfo(id));
     }
 
 
@@ -124,7 +129,7 @@ public class UserController {
     public ResponseEntity<List<UserDto>> findByPhoneNumberLike(@RequestParam
                                                                @Pattern(regexp = "(^$|[0-9]{5,10})", message = "At least enter 6 digits to search")
                                                                String phoneNumber) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findByPhoneNumberContaining(phoneNumber));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findByPhoneNumberContaining(phoneNumber));
     }
 
 
@@ -157,7 +162,7 @@ public class UserController {
     public ResponseEntity<List<UserDto>> findByEmailContaining(@PathVariable
                                                          @Email(message = "Please provide valid Email")
                                                          String email) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(userService.findByEmailContaining(email));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
     }
 
 
