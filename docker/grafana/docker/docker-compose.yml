@@ -16,6 +16,7 @@ services:
 #      file: common-config.yml
 #      service: network-deploy-service
 
+
   read:
     image: grafana/loki:3.0.0
     command: "-config.file=/etc/loki/config.yaml -target=read"
@@ -24,7 +25,7 @@ services:
       - 7946
       - 9095
     volumes:
-      - /loki/loki-config.yaml:/etc/loki/config.yaml
+      - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
     depends_on:
       - minio
     healthcheck:
@@ -45,7 +46,7 @@ services:
       - 7946
       - 9095
     volumes:
-      - /loki/loki-config.yaml:/etc/loki/config.yaml
+      - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
       interval: 10s
@@ -57,9 +58,9 @@ services:
       <<: *loki-dns
 
   alloy:
-    image: grafana/alloy:latest
+    image: grafana/alloy:v1.0.0
     volumes:
-      - /alloy/alloy-local-config.yaml:/etc/alloy/config.alloy:ro
+      - ../observability/alloy/alloy-local-config.yaml:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock
     command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
     ports:
@@ -71,7 +72,7 @@ services:
       service: network-deploy-service
 
   minio:
-    image: minio/minio
+    image: minio/minio:RELEASE.2024-05-27T19-17-46Z
     entrypoint:
       - sh
       - -euc
@@ -103,26 +104,26 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - /prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     extends:
       file: common-config.yml
       service: network-deploy-service
 
   tempo:
-    image: grafana/tempo
+    image: grafana/tempo:2.4.2
     container_name: tempo
     command: -config.file /etc/tempo-config.yml
     ports:
       - "3110:3100"
       - "4317:4317"
     volumes:
-      - /tempo/tempo.yml:/etc/tempo-config.yml
+      - ../observability/tempo/tempo.yml:/etc/tempo-config.yml
     extends:
       file: common-config.yml
       service: network-deploy-service
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:11.0.0
     environment:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
       - GF_AUTH_ANONYMOUS_ENABLED=true
@@ -137,7 +138,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
       interval: 10s
@@ -150,7 +151,7 @@ services:
   backend:
     image: grafana/loki:3.0.0
     volumes:
-      - /loki/loki-config.yaml:/etc/loki/config.yaml
+      - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
     ports:
       - "3100"
       - "7946"
@@ -162,7 +163,7 @@ services:
       service: network-deploy-service
 
   gateway:
-    image: nginx:latest
+    image: nginx:1.25.5
     depends_on:
       - read
       - write
@@ -230,6 +231,8 @@ services:
     extends:
       file: common-config.yml
       service: network-deploy-service
+
+
 
   config-server:
     image: "justamitsaha/ms-config-server:1gateway"
