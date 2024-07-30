@@ -57,6 +57,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.save(userDto));
     }
 
+    @PostMapping("setUpData")
+    public ResponseEntity<String> setUpData(@Valid @RequestBody UserDto userDto) {
+        this.userService.save(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("OK");
+    }
+
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());

@@ -15,7 +15,10 @@ public class RoutingConfiguration {
         return routeLocatorBuilder.routes()
                 .route(p -> p
                         .path("/auth/**")
-                        .filters(gatewayFilterSpec -> gatewayFilterSpec.rewritePath("/auth/(?<segment>.*)","/identity/${segment}"))
+                        .filters(gatewayFilterSpec -> gatewayFilterSpec
+                                .rewritePath("/auth/(?<segment>.*)","/identity/${segment}")
+                                .circuitBreaker(config -> config.setName("identity-circuit-breaker")
+                                        .setFallbackUri("forward:/product/configuration/contact-info")))
                         .uri("lb://IDENTITY-SERVICE"))
                 .build();
     }
