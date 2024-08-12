@@ -15,7 +15,7 @@
     <version>${project.version}</version>
     <packaging>jar</packaging>
     <name>identity-service</name>
-    <description>Authentication server for MicroserviceMaster</description>
+    <description>Authentication service for MicroserviceMaster</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

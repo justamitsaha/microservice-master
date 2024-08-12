@@ -26,11 +26,12 @@ public class SecurityConfiguration {
                                 .pathMatchers("/actuator/**").permitAll()
                                 .pathMatchers("/authentication/user/private/**").authenticated()
                                 .pathMatchers("/authentication/**").permitAll()
-                                .pathMatchers("/product/save").hasRole("MICROSERVICE")
+                                .pathMatchers("/product/save/private/**").hasRole("MICROSERVICE")
                                 .pathMatchers("/product/**").permitAll())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                        // .jwt(Customizer.withDefaults()));
                         .jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(grantedAuthoritiesExtractor())));
+        serverHttpSecurity.csrf(csrfSpec -> csrfSpec.disable());
         return serverHttpSecurity.build();
     }
 

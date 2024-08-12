@@ -36,6 +36,13 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
     }
 
+    @PostMapping("save/private")
+    public ResponseEntity<Mono<ProductDto>> privateSave(@RequestBody ProductDto productDto, @RequestHeader("userId") String userId) {
+        productDto.setUserId(Integer.parseInt(userId));
+        log.info("Inside ProductController save " +productDto.toString());
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
+    }
+
     @PostMapping(value = "saveAll", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<Flux<ProductDto>> saveAll(List<ProductDto> productDtoList, @RequestHeader("userId") String userId) {
         productDtoList.forEach(productDto ->
