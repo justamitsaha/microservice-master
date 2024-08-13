@@ -36,6 +36,10 @@ sudo docker rmi $(sudo docker images -q)
 docker container exec -it  d0b4  /bin/bash
 
 
+http://localhost:8080/actuator/circuitbreakers
+http://localhost:8080/actuator/circuitbreakerevents?name=identity-circuit-breaker
+
+
 
 
 
