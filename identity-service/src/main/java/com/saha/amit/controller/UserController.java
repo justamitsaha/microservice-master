@@ -173,6 +173,7 @@ public class UserController {
     public ResponseEntity<List<UserDto>> findByEmailContaining(@PathVariable
                                                          @Email(message = "Please provide valid Email")
                                                          String email) {
+        log.info("Inside findByEmailContaining ");
         return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
     }
 

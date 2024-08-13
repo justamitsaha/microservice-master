@@ -35,11 +35,17 @@ sudo docker rmi $(sudo docker images -q)
 
 docker container exec -it  d0b4  /bin/bash
 
-
+Resiliency
 http://localhost:8080/actuator/circuitbreakers
 http://localhost:8080/actuator/circuitbreakerevents?name=identity-circuit-breaker
+Put debug point in API with auth like http://localhost:8080/auth/user/findByEmailContaining/007@mailinator.com 
+and see the circuit breaker status changing
+
+To test circuit breaker with Feign client put debug point in getContactInfo  in ConfigurationController  of product service
+and hit the API http://localhost:8080/authentication/user/getUserContactInfo/2. It can go to Feign client or web client, check from identity service logs
+When it goes to Feign client we can see "companyContactInfoDto": null is returned
 
 
 
-
-
+To see retry pattern put debug point in getContactInfo  in ConfigurationController  of product service
+and hit the API http://localhost:8080/product/configuration/contact-info in the 

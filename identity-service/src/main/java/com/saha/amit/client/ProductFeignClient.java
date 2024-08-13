@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Configuration
-@FeignClient("${product.service.feign.configuration.url}")
+@FeignClient(name = "${product.service.feign.configuration.url}", fallback = ProductContactInfoFallback.class)
 public interface ProductFeignClient {
 
     @GetMapping("/contact-info")

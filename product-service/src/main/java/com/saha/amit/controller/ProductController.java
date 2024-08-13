@@ -2,6 +2,7 @@ package com.saha.amit.controller;
 
 import com.saha.amit.dto.ProductDto;
 import com.saha.amit.service.ProductService;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,8 @@ import java.util.List;
 @RequestMapping("product")
 public class ProductController {
 
-    Log log = LogFactory.getLog(ProductController.class);
-
     private final ProductService productService;
+    Log log = LogFactory.getLog(ProductController.class);
 
     @Autowired
     ProductController(ProductService productService) {
@@ -32,14 +32,14 @@ public class ProductController {
     @PostMapping("save")
     public ResponseEntity<Mono<ProductDto>> save(@RequestBody ProductDto productDto, @RequestHeader("userId") String userId) {
         productDto.setUserId(Integer.parseInt(userId));
-        log.info("Inside ProductController save " +productDto.toString());
+        log.info("Inside ProductController save " + productDto.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
     }
 
     @PostMapping("save/private")
     public ResponseEntity<Mono<ProductDto>> privateSave(@RequestBody ProductDto productDto, @RequestHeader("userId") String userId) {
         productDto.setUserId(Integer.parseInt(userId));
-        log.info("Inside ProductController save " +productDto.toString());
+        log.info("Inside ProductController save " + productDto.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
     }
 
@@ -55,9 +55,20 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.FOUND).body(productService.findById(id));
     }
 
+    @Retry(name = "findByUserId", fallbackMethod = "findByUserIdFallback")
     @GetMapping(value = "findByUserId/{userId}")
     public ResponseEntity<Flux<ProductDto>> findByUserId(@PathVariable int userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(productService.findByUserId(userId));
+        log.info("Inside findByUserId");
+        throw new RuntimeException();
+        //return ResponseEntity.status(HttpStatus.OK).body(productService.findByUserId(userId));
+    }
+
+    public ResponseEntity<Flux<ProductDto>> findByUserIdFallback(@PathVariable int userId) {
+        log.info("Inside findByUserIdFallback");
+        ProductDto productDto = new ProductDto();
+        productDto.setProductDescription("PLEASE TRY AGAIN LATER");
+        Flux<ProductDto> productDtoFlux = Flux.just(productDto);
+        return ResponseEntity.status(HttpStatus.OK).body(productDtoFlux);
     }
 
     @GetMapping(value = "search/{category}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
