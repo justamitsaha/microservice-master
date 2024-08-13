@@ -9,6 +9,7 @@ import com.saha.amit.util.Mapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,12 +26,15 @@ public class ProductService {
     ProductRepository productRepository;
     UserClient userClient;
 
+    StreamBridge streamBridge;
+
     Log log = LogFactory.getLog(ProductService.class);
 
     @Autowired
-    public ProductService(ProductRepository productRepository, UserClient userClient) {
+    public ProductService(ProductRepository productRepository, UserClient userClient, StreamBridge streamBridge) {
         this.productRepository = productRepository;
         this.userClient = userClient;
+        this.streamBridge = streamBridge;
     }
 
     public Mono<ProductDto> save(ProductDto productDto) {
@@ -40,9 +44,16 @@ public class ProductService {
                 Product product = Mapper.getProduct(productDto);
                 product.setUserId(userDto.getId());
                 product.setUserName(userDto.getName());
+                sendCommunication(productDto);
                 return productRepository.save(product);
             }
         }).flatMap(productMono -> productMono.map(Mapper::getProductDto));
+    }
+
+    private void sendCommunication(ProductDto productDto) {
+        log.info("Sending Communication request for the details: {} " + productDto);
+        var result = streamBridge.send("sendCommunication-out-0", productDto);
+        log.info("Is the Communication request successfully triggered ? : {} " + result);
     }
 
 //    public Mono<ProductDto> save(ProductDto productDto){

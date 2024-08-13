@@ -98,6 +98,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
 
+    @GetMapping("private/findById/{id}")
+    public ResponseEntity<UserDto> privateFindById(@PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
+    }
+
     @GetMapping("getUserContactInfo/{id}")
     public ResponseEntity<UserCustomerContactInfo> getUserContactInfo(@PathVariable String id) {
         log.info("Inside getUserContactInfo " +id);
