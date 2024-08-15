@@ -38,9 +38,8 @@ public class ConfigurationController {
 
     @GetMapping("/env-variables")
     public ResponseEntity<String> getEnvironmentValues() {
-        System.out.println("POTASH " + System.getenv("POTASH"));
+        log.info("POTASH " + System.getenv("POTASH"));
         String response = environment.getProperty("POTASH");
-        System.out.println(response);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(response);
