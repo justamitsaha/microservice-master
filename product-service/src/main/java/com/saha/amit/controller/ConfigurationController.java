@@ -1,6 +1,8 @@
 package com.saha.amit.controller;
 
 import com.saha.amit.record.CompanyContactInfoDto;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("configuration")
 public class ConfigurationController {
+
+    private Log log = LogFactory.getLog(ConfigurationController.class);
 
     @Value("${api.info}")
     private String buildVersion;
@@ -34,9 +38,8 @@ public class ConfigurationController {
 
     @GetMapping("/env-variables")
     public ResponseEntity<String> getEnvironmentValues() {
-        System.out.println("POTASH "+System.getenv("POTASH"));
+        log.info("POTASH " + System.getenv("POTASH"));
         String response = environment.getProperty("POTASH");
-        System.out.println(response);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(response);
@@ -44,6 +47,7 @@ public class ConfigurationController {
 
     @GetMapping("/contact-info")
     public ResponseEntity<CompanyContactInfoDto> getContactInfo() {
+        log.info("Inside getContactInfo");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(companyContactInfoDto);

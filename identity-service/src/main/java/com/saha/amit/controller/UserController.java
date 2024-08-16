@@ -4,6 +4,7 @@ import com.saha.amit.dto.ErrorResponseDto;
 import com.saha.amit.dto.UserDto;
 import com.saha.amit.dto.UserCustomerContactInfo;
 import com.saha.amit.service.UserService;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -169,12 +170,20 @@ public class UserController {
             )
     }
     )
+    @Retry(name = "findByEmailContaining", fallbackMethod = "findByEmailContainingFallback")
     @GetMapping("findByEmailContaining/{email}")
     public ResponseEntity<List<UserDto>> findByEmailContaining(@PathVariable
                                                          @Email(message = "Please provide valid Email")
                                                          String email) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
+        log.info("Inside findByEmailContaining ");
+        throw  new RuntimeException();
+        //return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
     }
 
+
+    public ResponseEntity<List<UserDto>> findByEmailContainingFallback(String email, Throwable throwable) {
+        log.info("Inside findByEmailContainingFallback  ");
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
+    }
 
 }

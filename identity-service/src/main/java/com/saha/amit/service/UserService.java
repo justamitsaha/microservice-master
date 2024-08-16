@@ -63,7 +63,7 @@ public class UserService {
     }
 
     public UserCustomerContactInfo getUserContactInfo(String id) {
-        log.info("Inside getUserContactInfo service" +id);
+        log.info("Inside getUserContactInfo service" + id);
         UserCustomerContactInfo userCustomerContactInfo = new UserCustomerContactInfo();
         var opt = userRepository.findById(Integer.parseInt(id));
         User user = opt.orElseThrow(() -> new UserNoFoundException("User not Found"));
@@ -103,13 +103,13 @@ public class UserService {
         Random random = new Random();
         if (random.nextBoolean()) {
             log.info("From Feign client");
-            return productFeignClient.getContactInfo()
-                    .getBody();
+            var response = productFeignClient.getContactInfo();
+            if (null == response)
+                return null;
+            else
+                return productFeignClient.getContactInfo().getBody();
         } else {
             log.info("From web client");
-//            productClient.findByUserId(2).forEach(
-//                    s-> log.info(s.toString())
-//            );
             return productClient.getContactInfo();
         }
     }
