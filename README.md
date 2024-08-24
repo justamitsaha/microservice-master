@@ -49,3 +49,18 @@ When it goes to Feign client we can see "companyContactInfoDto": null is returne
 
 To see retry pattern put debug point in getContactInfo  in ConfigurationController  of product service
 and hit the API http://localhost:8080/product/configuration/contact-info in the 
+
+
+Rabbit MQ
+docker run -it --rm --name chapri -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
+
+docker exec --interactive --tty kafka1  kafka-topics --bootstrap-server kafka1:19092 --create --topic product --replication-factor 3 --partitions 3
+
+docker exec --interactive --tty kafka1 kafka-topics --bootstrap-server kafka1:19092 --describe
+
+docker exec --interactive --tty kafka1 kafka-topics --bootstrap-server kafka1:19092 --describe --topic product
+
+docker exec --interactive --tty kafka1  kafka-console-producer --bootstrap-server localhost:9092,kafka2:19093,kafka3:19094 --topic product
+
+docker exec --interactive --tty kafka1  kafka-console-consumer --bootstrap-server localhost:9092,kafka2:19093,kafka3:19094 --topic product --from-beginning
+
