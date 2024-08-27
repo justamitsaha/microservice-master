@@ -3,7 +3,7 @@
 echo Current Path:
 cd
 
-set "DOCKER_TAG=1gateway"
+set "DOCKER_TAG=2Kube"
 
 cd ../config-server
 set /p user_action="Do you want to run config server?enter y/n --> "

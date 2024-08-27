@@ -10,7 +10,7 @@ import com.saha.amit.util.Mapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.stream.function.StreamBridge;
+//import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -32,7 +32,7 @@ public class ProductService {
     Log log = LogFactory.getLog(ProductService.class);
 
     @Autowired
-    public ProductService(ProductRepository productRepository, UserClient userClient, StreamBridge streamBridge, EventProducer eventProducer) {
+    public ProductService(ProductRepository productRepository, UserClient userClient,  EventProducer eventProducer) {
         this.productRepository = productRepository;
         this.userClient = userClient;
         this.eventProducer = eventProducer;
@@ -51,12 +51,13 @@ public class ProductService {
                 })
                 .flatMap(productMono -> productMono.map(Mapper::getProductDto))
                 .doOnSuccess(productDto1 -> {
-                    eventProducer.sendRabbitMqCommunication(productDto1);
-                    try {
-                        eventProducer.sendKafkaEvent(productDto);
-                    } catch (JsonProcessingException e) {
-                        log.error("Error in sending to Kafka"+e);
-                    }
+                    log.info(productDto1.toString());
+//                    eventProducer.sendRabbitMqCommunication(productDto1);
+//                    try {
+//                        eventProducer.sendKafkaEvent(productDto);
+//                    } catch (JsonProcessingException e) {
+//                        log.error("Error in sending to Kafka"+e);
+//                    }
                 });
     }
 

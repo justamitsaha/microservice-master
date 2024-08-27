@@ -23,13 +23,13 @@ public class IdentityServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        UserDto userDto = new UserDto("Amit Saha","amit007@mailinator.com", "9999999999", "SELLER", "pwd");
-//        UserDto userDto1 = new UserDto("Shamit Saha","shamit007@mailinator.com", "9999999998", "SELLER", "pwd");
-//        UserDto userDto2 = new UserDto("Shivangi Saha","shivang007i@mailinator.com", "9999999997", "SELLER", "pwd");
-//        UserDto userDto3 = new UserDto("Anju Saha","anju007@mailinator.com", "9999999996", "SELLER", "pwd");
-//        userService.save(userDto);
-//        userService.save(userDto1);
-//        userService.save(userDto2);
-//        userService.save(userDto3);
+        UserDto userDto = new UserDto("Amit Saha","amit007@mailinator.com", "9999999999", "SELLER", "pwd");
+        UserDto userDto1 = new UserDto("Shamit Saha","shamit007@mailinator.com", "9999999998", "SELLER", "pwd");
+        UserDto userDto2 = new UserDto("Shivangi Saha","shivang007i@mailinator.com", "9999999997", "SELLER", "pwd");
+        UserDto userDto3 = new UserDto("Anju Saha","anju007@mailinator.com", "9999999996", "SELLER", "pwd");
+        userService.save(userDto);
+        userService.save(userDto1);
+        userService.save(userDto2);
+        userService.save(userDto3);
     }
 }

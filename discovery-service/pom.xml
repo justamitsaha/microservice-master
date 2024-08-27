@@ -63,7 +63,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>justamitsaha/${project.artifactId}:discovery_service_gateway_2</name>
+                        <name>justamitsaha/${project.artifactId}:kube_3</name>
                     </image>
                 </configuration>
             </plugin>

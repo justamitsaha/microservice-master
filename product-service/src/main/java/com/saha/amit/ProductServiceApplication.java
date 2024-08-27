@@ -39,16 +39,16 @@ public class ProductServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        String query = StreamUtils.copyToString(initSql.getInputStream(), StandardCharsets.UTF_8);
-//        log.info(query);
-//        this.entityTemplate
-//                .getDatabaseClient()
-//                .sql(query)
-//                .then()
-//                .subscribe();
+        String query = StreamUtils.copyToString(initSql.getInputStream(), StandardCharsets.UTF_8);
+        log.info(query);
+        this.entityTemplate
+                .getDatabaseClient()
+                .sql(query)
+                .then()
+                .subscribe();
 
         Faker faker = new Faker();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 100; i++) {
             String category = faker.commerce().department();
             category = category.replace(" ", "_");
             ProductDto productDto = new ProductDto(
