@@ -10,12 +10,30 @@ public class ProductDto {
     private String productDescription;
     private int price;
     private String imagePath;
-    private String category;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int userId;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String userName;
+    private int categoryId;
 
+    private String categoryName;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public String getUserName() {
         return userName;
@@ -28,25 +46,40 @@ public class ProductDto {
     public ProductDto() {
     }
 
-    public ProductDto(String productName, String productDescription, int price, String imagePath, String category, int userId, String userName) {
+    public ProductDto(String productName, String productDescription, int price,
+                      String imagePath, int categoryId, int userId, String userName) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;
         this.imagePath = imagePath;
-        this.category = category;
+        this.categoryId = categoryId;
         this.userId = userId;
         this.userName = userName;
     }
 
-    public ProductDto(int productId, String productName, String productDescription, int price, String imagePath, String category, int userId, String userName) {
+    public ProductDto(int productId, String productName, String productDescription, int price,
+                      String imagePath, int categoryId, int userId, String userName) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;
         this.imagePath = imagePath;
-        this.category = category;
+        this.categoryId = categoryId;
         this.userId = userId;
         this.userName = userName;
+    }
+
+    public ProductDto(int productId, String productName, String productDescription, int price,
+                      String imagePath, int categoryId, int userId, String userName, String categoryName) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+        this.imagePath = imagePath;
+        this.categoryId = categoryId;
+        this.userId = userId;
+        this.userName = userName;
+        this.categoryName = categoryName;
     }
 
     @Override
@@ -57,7 +90,7 @@ public class ProductDto {
                 ", productDescription='" + productDescription + '\'' +
                 ", price=" + price +
                 ", imagePath='" + imagePath + '\'' +
-                ", category='" + category + '\'' +
+                ", categoryName='" + categoryName + '\'' +
                 ", userId=" + userId +
                 '}';
     }
@@ -102,13 +135,6 @@ public class ProductDto {
         this.imagePath = imagePath;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public int getUserId() {
         return userId;

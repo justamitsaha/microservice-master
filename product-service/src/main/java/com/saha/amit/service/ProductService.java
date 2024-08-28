@@ -1,10 +1,10 @@
 package com.saha.amit.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.saha.amit.client.UserClient;
 import com.saha.amit.dto.ProductDto;
 import com.saha.amit.dto.UserDto;
 import com.saha.amit.entity.Product;
+import com.saha.amit.repository.ProductCategoryRepository;
 import com.saha.amit.repository.ProductRepository;
 import com.saha.amit.util.Mapper;
 import org.apache.commons.logging.Log;
@@ -25,6 +25,8 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+
+    private final ProductCategoryRepository productCategoryRepository;
     private final UserClient userClient;
 
     private final EventProducer eventProducer;
@@ -32,20 +34,23 @@ public class ProductService {
     Log log = LogFactory.getLog(ProductService.class);
 
     @Autowired
-    public ProductService(ProductRepository productRepository, UserClient userClient,  EventProducer eventProducer) {
+    public ProductService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, UserClient userClient, EventProducer eventProducer) {
         this.productRepository = productRepository;
+        this.productCategoryRepository = productCategoryRepository;
         this.userClient = userClient;
         this.eventProducer = eventProducer;
     }
 
 
     public Mono<ProductDto> save(ProductDto productDto) {
-        return getUser(productDto.getUserId()).map(userDto -> {
+        return getUser(productDto.getUserId())
+                .map(userDto -> {
                     if (null == userDto) throw new RuntimeException();
                     else {
                         Product product = Mapper.getProduct(productDto);
                         product.setUserId(userDto.getId());
                         product.setUserName(userDto.getName());
+                        log.info("Product to be saved -> "+product.toString());
                         return productRepository.save(product);
                     }
                 })
@@ -76,8 +81,10 @@ public class ProductService {
         return productRepository.findByUserId(id).map(Mapper::getProductDto);
     }
 
-    public Flux<ProductDto> findByCategory(String category) {
-        return productRepository.findByCategory(category).map(Mapper::getProductDto);
+    public Flux<ProductDto> findByCategoryId(int category) {
+        return productCategoryRepository.getProductWithCategory(category)
+                .doOnNext(s-> log.info("Product from DB "+ s.toString()))
+                .map(Mapper::getProductCategoryDto);
     }
 
     public Flux<ProductDto> findByPriceBetween(Double price1, Double price2) {

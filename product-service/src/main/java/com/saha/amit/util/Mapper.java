@@ -2,6 +2,7 @@ package com.saha.amit.util;
 
 import com.saha.amit.dto.ProductDto;
 import com.saha.amit.entity.Product;
+import com.saha.amit.entity.ProductCategory;
 
 public class Mapper {
 
@@ -11,9 +12,10 @@ public class Mapper {
                 productDto.getProductDescription(),
                 productDto.getPrice(),
                 productDto.getImagePath(),
-                productDto.getCategory(),
+                productDto.getCategoryId(),
                 productDto.getUserId(),
-                productDto.getUserName());
+                productDto.getUserName()
+        );
     }
 
     public static ProductDto getProductDto(Product product){
@@ -23,8 +25,25 @@ public class Mapper {
                 product.getProductDescription(),
                 product.getPrice(),
                 product.getImagePath(),
-                product.getCategory(),
+                product.getCategoryId(),
                 product.getUserId(),
-                product.getUserName());
+                product.getUserName()
+        );
     }
+
+    public static ProductDto getProductCategoryDto(ProductCategory productCategory){
+        return new ProductDto(
+                productCategory.getProductId(),
+                productCategory.getProductName(),
+                productCategory.getProductDescription(),
+                productCategory.getPrice(),
+                productCategory.getImagePath(),
+                productCategory.getCategoryId(),
+                productCategory.getUserId(),
+                productCategory.getUserName(),
+                productCategory.getCategoryName()
+        );
+    }
+
+
 }

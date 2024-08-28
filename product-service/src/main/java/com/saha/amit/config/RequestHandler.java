@@ -43,10 +43,11 @@ public class RequestHandler {
     }
 
     public Mono<ServerResponse> findByCategory(ServerRequest serverRequest){
-        String category = String.valueOf(serverRequest.queryParam("category"));
+        //String category = String.valueOf(serverRequest.queryParam("category"));
+        int category = Integer.parseInt(serverRequest.pathVariable("price2"));
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_EVENT_STREAM)
-                .body(productService.findByCategory(category),Product.class);
+                .body(productService.findByCategoryId(category),Product.class);
     }
 
     public Mono<ServerResponse> findByPriceBetween(ServerRequest serverRequest){

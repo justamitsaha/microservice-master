@@ -39,13 +39,13 @@ public class ProductServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String query = StreamUtils.copyToString(initSql.getInputStream(), StandardCharsets.UTF_8);
-        log.info(query);
-        this.entityTemplate
-                .getDatabaseClient()
-                .sql(query)
-                .then()
-                .subscribe();
+//        String query = StreamUtils.copyToString(initSql.getInputStream(), StandardCharsets.UTF_8);
+//        log.info(query);
+//        this.entityTemplate
+//                .getDatabaseClient()
+//                .sql(query)
+//                .then()
+//                .subscribe();
 
         Faker faker = new Faker();
         for (int i = 0; i < 100; i++) {
@@ -56,7 +56,7 @@ public class ProductServiceApplication implements CommandLineRunner {
                     faker.howIMetYourMother().catchPhrase(),
                     faker.random().nextInt(1, 10000),
                     faker.funnyName().name(),
-                    category,
+                    faker.random().nextInt(1,10),
                     1,
                     "Amit Saha");
             log.info(productDto.toString());

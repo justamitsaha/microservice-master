@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface ProductRepository extends ReactiveCrudRepository<Product, Integer> {
-    public Flux<Product> findByCategory(String category);
+    public Flux<Product> findByCategoryId(int category);
     public Flux<Product> findByPriceBetween(Double price1, Double price2);
     public Flux<Product> findByUserId(int userId);
 }

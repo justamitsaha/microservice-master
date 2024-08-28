@@ -1,13 +1,6 @@
 package com.saha.amit.entity;
 
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-
-@Table("Product")
-public class Product {
-
-    @Id
+public class ProductCategory {
     private int productId;
     private String productName;
     private String productDescription;
@@ -16,19 +9,15 @@ public class Product {
     private int userId;
     private String userName;
     private int categoryId;
-    public Product() {
+    private String categoryName;
+
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public Product(String productName, String productDescription, int price, String imagePath, int categoryId, int userId, String userName) {
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.price = price;
-        this.imagePath = imagePath;
-        this.categoryId = categoryId;
-        this.userId = userId;
-        this.userName = userName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
-
 
     public int getProductId() {
         return productId;
@@ -70,14 +59,6 @@ public class Product {
         this.imagePath = imagePath;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public int getUserId() {
         return userId;
     }
@@ -94,9 +75,18 @@ public class Product {
         this.userName = userName;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductCategory{" +
                 "productId=" + productId +
                 ", productName='" + productName + '\'' +
                 ", productDescription='" + productDescription + '\'' +
@@ -105,6 +95,7 @@ public class Product {
                 ", userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
                 '}';
     }
 }
