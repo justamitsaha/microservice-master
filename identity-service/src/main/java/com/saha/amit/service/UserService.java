@@ -38,7 +38,6 @@ public class UserService {
     }
 
     public UserDto save(@Valid UserDto userDto) {
-        log.info("Inside Save " + userDto.toString());
         User user = MapperClass.getUser(userDto);
         log.info("user -->" + user.toString());
         return MapperClass.getUserDto(userRepository.save(user));

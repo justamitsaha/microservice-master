@@ -19,3 +19,5 @@ CREATE TABLE product (
     foreign key (category_id) references category(id)
 );
 
+
+SELECT U.ID , U.EMAIL , U.NAME , U.PHONE_NUMBER , U.ROLE, P.OK_TO_MAIL , P.OK_TO_PUSH , P.OK_TO_SMS , P.TIME_STAMP  FROM USER_TABLE U JOIN USER_PREFERENCE P ON U.ID = P.USER_ID WHERE P.OK_TO_PUSH =TRUE
