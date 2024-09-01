@@ -18,8 +18,11 @@ public class MapperClass {
         user.setPhoneNumber(userDto.getPhoneNumber());
         user.setRole(userDto.getRole());
         //If this is creation of user then user id will be 0 by default hence preference is set as false
-        if (userDto.getId() == 0)
-            user.setUserPreferenceReference(new UserPreference(false, false, false, Instant.now()));
+        if (userDto.getId() == 0) {
+            UserPreference userPreference =new UserPreference(false, false, false, Instant.now());
+            userPreference.setUserMaster(user);
+            user.setUserPreferenceReference(userPreference);
+        }
         return user;
     }
 

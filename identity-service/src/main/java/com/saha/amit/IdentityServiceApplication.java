@@ -42,11 +42,19 @@ public class IdentityServiceApplication implements CommandLineRunner {
         userDto2 = userService.save(userDto2);
         userDto3 = userService.save(userDto3);
 
-        log.info(userDto);
+
         UserPreference userPreference = MapperClass.createUserPreferenceDto(MapperClass.getUser(userDto));
+        userPreference.setId(1);
+        userPreference.setUserMaster(MapperClass.getUser(userDto));
         UserPreference userPreference1 = MapperClass.createUserPreferenceDto(MapperClass.getUser(userDto1));
+        userPreference1.setId(2);
+        userPreference1.setUserMaster(MapperClass.getUser(userDto1));
         UserPreference userPreference2 = MapperClass.createUserPreferenceDto(MapperClass.getUser(userDto2));
+        userPreference2.setId(3);
+        userPreference2.setUserMaster(MapperClass.getUser(userDto2));
         UserPreference userPreference3 = MapperClass.createUserPreferenceDto(MapperClass.getUser(userDto3));
+        userPreference3.setId(4);
+        userPreference3.setUserMaster(MapperClass.getUser(userDto3));
         userPreferenceRepository.save(userPreference);
         userPreferenceRepository.save(userPreference1);
         userPreferenceRepository.save(userPreference2);
