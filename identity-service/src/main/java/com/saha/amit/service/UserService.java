@@ -112,4 +112,14 @@ public class UserService {
             return productClient.getContactInfo();
         }
     }
+
+    public List<User> findUsersWithMailPreference(Boolean okToMail) {
+        Random random = new Random();
+        boolean bool = random.nextBoolean();
+        log.info("Query type " + (bool ? "Fetching preference with native query" : "Fetching with JPQL"));
+        if (bool)
+           return userRepository.findUsersWithMailPreferenceNative(okToMail);
+        else
+            return userRepository.findUsersWithMailPreference(okToMail);
+    }
 }

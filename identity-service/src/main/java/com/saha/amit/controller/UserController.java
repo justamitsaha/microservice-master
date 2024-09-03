@@ -4,6 +4,7 @@ import com.saha.amit.dto.ErrorResponseDto;
 import com.saha.amit.dto.UserDto;
 import com.saha.amit.dto.UserCustomerContactInfo;
 import com.saha.amit.service.UserService;
+import com.saha.amit.util.MapperClass;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -180,10 +182,19 @@ public class UserController {
         //return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
     }
 
+    @GetMapping("findUsersWithMailPreference/{email}")
+    public ResponseEntity<List<UserDto>> findUsersWithMailPreference(String email) {
+        log.info("Inside findByEmailContainingFallback  ");
+        List<UserDto> userDtoList = new ArrayList<>();
+        userService.findUsersWithMailPreference(Boolean.valueOf(email))
+                .forEach(user -> userDtoList.add(MapperClass.getUserDto(user)));
+        return ResponseEntity.status(HttpStatus.OK).body(userDtoList);
+    }
 
     public ResponseEntity<List<UserDto>> findByEmailContainingFallback(String email, Throwable throwable) {
         log.info("Inside findByEmailContainingFallback  ");
         return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
     }
+
 
 }
