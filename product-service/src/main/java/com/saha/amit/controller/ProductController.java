@@ -2,9 +2,11 @@ package com.saha.amit.controller;
 
 import com.saha.amit.dto.ProductDto;
 import com.saha.amit.service.ProductService;
+import com.saha.amit.util.Mapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -73,7 +75,7 @@ public class ProductController {
     public Mono<ResponseEntity<Void>>  deleteCustomerById(@PathVariable Integer id){
             return this.productService.deleteCustomerById(id)
                     .filter(aBoolean -> aBoolean)
-                    .map(aBoolean -> ResponseEntity.ok().build())
+                    .map(aBoolean -> ResponseEntity.ok().<Void>build())
                     .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
@@ -97,5 +99,11 @@ public class ProductController {
     public ResponseEntity<Flux<ProductDto>> getAllProduct() {
         log.info("Inside getAllProduct");
         return ResponseEntity.status(HttpStatus.FOUND).body(productService.getAllProduct().delayElements(Duration.ofMillis(500)));
+    }
+
+    @GetMapping(value = "getAllProductPage", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public ResponseEntity<Flux<ProductDto>> getAllProductPage(@RequestParam(defaultValue = "1") Integer page,
+                                                              @RequestParam(defaultValue = "10") Integer size) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(productService.getAllProductPage(page, size).delayElements(Duration.ofMillis(500)));
     }
 }

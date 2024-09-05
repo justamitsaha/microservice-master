@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.cloud.stream.function.StreamBridge;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -73,6 +74,10 @@ public class ProductService {
         return productRepository.saveAll(products).map(Mapper::getProductDto);
     }
 
+    public Mono<Boolean> deleteById(int id){
+        return productRepository.deleteById(id);
+    }
+
     public Mono<Boolean> deleteCustomerById(int id){
         //return productRepository.deleteById(id);
         return productRepository.deleteById(id);
@@ -99,6 +104,13 @@ public class ProductService {
     public Flux<ProductDto> getAllProduct() {
         return productRepository.findAll().map(Mapper::getProductDto);
     }
+
+    public Flux<ProductDto> getAllProductPage(Integer page, Integer size) {
+        return productRepository.findBy(PageRequest.of(page-1, size)).
+                map(Mapper::getProductDto);
+    }
+
+
 
     public Mono<UserDto> getUser(int id) {
         return userClient.getUserById(id);
