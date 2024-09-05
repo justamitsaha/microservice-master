@@ -276,7 +276,47 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/authentication/user/findById/5"
+								"url": "http://localhost:8080/authentication/user/findById/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Auth_Find_user_by_id Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": {
+										"clientSecret": "Y0COvHtABHy7SHptkSfs91Ov2pIxbjbx",
+										"client_authentication": "body",
+										"scope": "openid email profile",
+										"clientId": "microservice",
+										"accessTokenUrl": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+										"grant_type": "client_credentials",
+										"tokenName": "clientcredentials_accesstoken",
+										"addTokenTo": "header"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ4a0pnS19PdkFGdF9UZi1QTUx6Ql9IWF9ZYWFFSExtT3hHQnZuNVFBUkVZIn0.eyJleHAiOjE3MjI5MTg1NzQsImlhdCI6MTcyMjkxODUxNCwianRpIjoiMzM5MWQxNzgtZmU3Yy00YzQxLTliNjktM2NhZWFiNzBkZDYxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MDgwL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNmZhZmFiODAtMjNhYS00YzJjLTg2MDAtZmU4ZTM4MTBlYTVjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWljcm9zZXJ2aWNlIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1tYXN0ZXIiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImNsaWVudEhvc3QiOiIxNzIuMTcuMC4xIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtbWljcm9zZXJ2aWNlIiwiY2xpZW50QWRkcmVzcyI6IjE3Mi4xNy4wLjEiLCJjbGllbnRfaWQiOiJtaWNyb3NlcnZpY2UifQ.DVd8PjEJtWrkwTe4yJcQYkaURawCVn05ZPdTEAojQlbVukJCU_asLPt-fpBQyMcpit5sIGWOUfnUj0h1D5eIh3etFVw-X9pl2U_J0epD5sgXdUxQQOC4haC32FXFNBoZ-9pB-aPbYOFNZclbvHHIyCos-5s-lCDRhoy4EK36lJqkvMpSL7fhxukPlLcpsKr8dkQ2iUYuyu0547DyziLUVFjpy-oypT-HNaR-f7zUfDm_S2kmQSMqfLIoAn561_P9EtVUDJUEUdUzty75oXvmW76VkmEKVYmnqH2FXWizr5g9yS_2S98WOVN-Mtj4x3VV6XO2FrjjxBaUhKrhnJnI9w",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/authentication/user/private/findById/1"
 							},
 							"response": []
 						},
@@ -327,6 +367,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "GetAllUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/authentication/user"
+							},
+							"response": []
+						},
+						{
+							"name": "Get_user_contact_info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/authentication/user/getUserContactInfo/2"
+							},
+							"response": []
+						},
+						{
+							"name": "FetchwithUserPreference",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/auth/user/findUsersWithMailPreference/true"
+							},
+							"response": []
 						}
 					]
 				},
@@ -366,8 +433,21 @@
 							]
 						},
 						{
-							"name": "SaveProduct",
+							"name": "AuthSaveProduct",
 							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": {
+										"clientSecret": "Y0COvHtABHy7SHptkSfs91Ov2pIxbjbx",
+										"client_authentication": "body",
+										"scope": "openid email profile",
+										"clientId": "microservice",
+										"accessTokenUrl": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+										"grant_type": "client_credentials",
+										"tokenName": "clientcredentials_accesstoken",
+										"addTokenTo": "header"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -384,7 +464,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/product/save"
+								"url": "http://localhost:8080/product/save/private"
 							},
 							"response": []
 						},
@@ -402,7 +482,33 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8080/product/findById/101"
+								"url": "http://localhost:8080/product/findById/100"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_product_by_user_id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/product/findByUserId/0"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_product_category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/product/search/0"
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteProduct",
+							"request": {
+								"method": "GET",
+								"header": []
 							},
 							"response": []
 						}
@@ -462,6 +568,413 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "CircuitBreaker",
+					"item": [
+						{
+							"name": "CircuitBreaker",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/actuator/circuitbreakers"
+							},
+							"response": []
+						},
+						{
+							"name": "CircuitBreakerEventsDetails",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/circuitbreakerevents?name=identity-circuit-breaker",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"circuitbreakerevents"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "identity-circuit-breaker"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Util",
+					"item": [
+						{
+							"name": "Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": 100,\r\n    \"productName\": \"Enormous Marble Hat\",\r\n    \"productDescription\": \"Classic Shmosby\",\r\n    \"price\": 9148,\r\n    \"imagePath\": \"Bo D. Satva\",\r\n    \"category\": \"Outdoors\",\r\n    \"userId\": 0,\r\n    \"userName\": \"Amit Saha\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8083/email"
+							},
+							"response": []
+						},
+						{
+							"name": "SMS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": 100,\r\n    \"productName\": \"Enormous Marble Hat\",\r\n    \"productDescription\": \"Classic Shmosby\",\r\n    \"price\": 9148,\r\n    \"imagePath\": \"Bo D. Satva\",\r\n    \"category\": \"Outdoors\",\r\n    \"userId\": 0,\r\n    \"userName\": \"Amit Saha\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8082/sms"
+							},
+							"response": []
+						},
+						{
+							"name": "EmailSMS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": 100,\r\n    \"productName\": \"Enormous Marble Hat\",\r\n    \"productDescription\": \"Classic Shmosby\",\r\n    \"price\": 9148,\r\n    \"imagePath\": \"Bo D. Satva\",\r\n    \"category\": \"Outdoors\",\r\n    \"userId\": 0,\r\n    \"userName\": \"Amit Saha\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8082/emailsms"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Util2",
+					"item": [
+						{
+							"name": "SaveProduct",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "userId",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productDescription\": \"best jaht\",\r\n    \"price\": 20000,\r\n    \"productName\": \"android1\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8082/product/save"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Local-Server-ApiGateway-Desktop",
+			"item": [
+				{
+					"name": "Identity-service",
+					"item": [
+						{
+							"name": "User_create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev007@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://192.168.0.143:8080/authentication/user/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_by_id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://192.168.0.143:8080/authentication/user/findById/5"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_by_email",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://192.168.0.143:8080/auth/user/findByEmailContaining/007@mailinator.com"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_user_By_PhoneNumber",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://192.168.0.143:8080/authentication/user/findByPhoneNumberContaining?phoneNumber=999999999",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"0",
+										"143"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user",
+										"findByPhoneNumberContaining"
+									],
+									"query": [
+										{
+											"key": "phoneNumber",
+											"value": "999999999"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product-Service",
+					"item": [
+						{
+							"name": "Configuration-service",
+							"item": [
+								{
+									"name": "Configuration-API-info",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://192.168.0.143:8080/product/configuration/api-info"
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-enviornment",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://192.168.0.143:8080/product/configuration/env-variables"
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-Contact-class",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://192.168.0.143:8080/product/configuration/contact-info"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "SaveProduct",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "userId",
+										"value": "1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://192.168.0.143:8080/product/save"
+							},
+							"response": []
+						},
+						{
+							"name": "Search_product_by_price",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://192.168.0.143:8080/product/search/2000/5000"
+							},
+							"response": []
+						},
+						{
+							"name": "Find_producyt_by_id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://192.168.0.143:8080/product/findById/100"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "Actuator-ConfigServer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "http://localhost:8071/actuator/refresh"
+							},
+							"response": []
+						},
+						{
+							"name": "Actuator-Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "http://localhost:8081/actuator/refresh"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ConfigServer",
+					"item": [
+						{
+							"name": "Config-Get_properties",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8071/product-service/default"
+							},
+							"response": []
+						},
+						{
+							"name": "Encrypt",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "johns@mailinator.com",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": "http://localhost:8071/encrypt"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "KeyCloak",
+			"item": [
+				{
+					"name": "GetToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "microservice",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Y0COvHtABHy7SHptkSfs91Ov2pIxbjbx",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid email profile",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:7080/realms/master/protocol/openid-connect/token"
+					},
+					"response": []
 				}
 			]
 		}
