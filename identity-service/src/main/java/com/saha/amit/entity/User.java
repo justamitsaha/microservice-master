@@ -25,5 +25,16 @@ public class User extends BaseEntity {
     private UserPreference userPreferenceReference;
 
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
+                (userPreferenceReference != null ? ", userPreferenceReference=" + userPreferenceReference : "") +
+                '}';
+    }
 }

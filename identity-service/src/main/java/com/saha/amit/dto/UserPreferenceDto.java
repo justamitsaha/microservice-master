@@ -1,5 +1,6 @@
 package com.saha.amit.dto;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 import java.time.Instant;
@@ -10,15 +11,12 @@ import java.time.Instant;
 @NoArgsConstructor
 public class UserPreferenceDto {
     private int id;
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String role;
     private boolean okToPush;
     private boolean okToMail;
     private boolean okToSms;
     private Instant timeStamp;
-
-    public UserPreferenceDto(boolean okToPush, boolean okToMail, boolean okToSms, Instant timeStamp) {
-        this.okToPush = okToPush;
-        this.okToMail = okToMail;
-        this.okToSms = okToSms;
-        this.timeStamp = timeStamp;
-    }
 }

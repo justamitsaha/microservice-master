@@ -35,13 +35,6 @@ public class MapperClass {
         userDto.setPassword(user.getPassword());
         userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setRole(user.getRole());
-        UserPreferenceDto userPreferenceDto = new UserPreferenceDto(
-                user.getUserPreferenceReference().isOkToPush(),
-                user.getUserPreferenceReference().isOkToMail(),
-                user.getUserPreferenceReference().isOkToSms(),
-                user.getUserPreferenceReference().getTimeStamp()
-        );
-        userDto.setUserPreferenceDto(userPreferenceDto);
         return userDto;
     }
 

@@ -50,8 +50,6 @@ public class UserDto {
     )
     private String password;
 
-    private UserPreferenceDto userPreferenceDto;
-
 
     public UserDto(String name, String email, String phoneNumber, String role, String password) {
         this.name = name;

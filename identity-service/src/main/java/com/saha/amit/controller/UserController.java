@@ -3,8 +3,8 @@ package com.saha.amit.controller;
 import com.saha.amit.dto.ErrorResponseDto;
 import com.saha.amit.dto.UserDto;
 import com.saha.amit.dto.UserCustomerContactInfo;
+import com.saha.amit.dto.UserPreferenceDto;
 import com.saha.amit.service.UserService;
-import com.saha.amit.util.MapperClass;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -182,11 +182,21 @@ public class UserController {
     }
 
     @GetMapping("findUsersWithMailPreference/{email}")
-    public ResponseEntity<List<UserDto>> findUsersWithMailPreference(@PathVariable String email) {
+    public ResponseEntity<List<UserPreferenceDto>> findUsersWithMailPreference(@PathVariable String email) {
         log.info("Inside findUsersWithMailPreference  " + email);
-        List<UserDto> userDtoList = new ArrayList<>();
+        List<UserPreferenceDto> userDtoList = new ArrayList<>();
         userService.findUsersWithMailPreference(Boolean.valueOf(email))
-                .forEach(user -> userDtoList.add(MapperClass.getUserDto(user)));
+                .forEach(user -> userDtoList.add(new UserPreferenceDto(
+                        user.getId(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getPhoneNumber(),
+                        user.getRole(),
+                        user.getUserPreferenceReference().isOkToPush(),
+                        user.getUserPreferenceReference().isOkToMail(),
+                        user.getUserPreferenceReference().isOkToSms(),
+                        user.getUserPreferenceReference().getTimeStamp()
+                )));
         return ResponseEntity.status(HttpStatus.OK).body(userDtoList);
     }
 
