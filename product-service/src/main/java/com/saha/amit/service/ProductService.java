@@ -73,6 +73,11 @@ public class ProductService {
         return productRepository.saveAll(products).map(Mapper::getProductDto);
     }
 
+    public Mono<Boolean> deleteCustomerById(int id){
+        //return productRepository.deleteById(id);
+        return productRepository.deleteById(id);
+    }
+
     public Mono<ProductDto> findById(int id) {
         return productRepository.findById(id).map(Mapper::getProductDto);
     }

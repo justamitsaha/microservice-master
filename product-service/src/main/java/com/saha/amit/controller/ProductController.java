@@ -16,6 +16,18 @@ import java.time.Duration;
 import java.util.List;
 
 
+
+
+   /*
+   https://docs.spring.io/spring-framework/reference/web/webflux/controller/ann-methods/responseentity.html
+    ResponseEntity<Mono<T>> or ResponseEntity<Flux<T>> make the response status and headers known immediately while the body is provided asynchronously at a later point.
+    Use Mono if the body consists of 0..1 values or Flux if it can produce multiple values.
+    Mono<ResponseEntity<T>> provides all three — response status, headers, and body, asynchronously at a later point.
+    This allows the response status and headers to vary depending on the outcome of asynchronous request handling.
+    Mono<ResponseEntity<Mono<T>>> or Mono<ResponseEntity<Flux<T>>> are yet another possible, albeit less common alternative.
+    They provide the response status and headers asynchronously first and then the response body, also asynchronously, second.
+*/
+
 @RestController
 @RequestMapping("product")
 public class ProductController {
@@ -50,8 +62,19 @@ public class ProductController {
     }
 
     @GetMapping(value = "findById/{id}")
-    public ResponseEntity<Mono<ProductDto>> findById(@PathVariable int id) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(productService.findById(id));
+    public Mono<ResponseEntity<ProductDto>> findById(@PathVariable int id) {
+        //return ResponseEntity.status(HttpStatus.FOUND).body(productService.findById(id));
+        return productService.findById(id)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @DeleteMapping("{id}")
+    public Mono<ResponseEntity<Void>>  deleteCustomerById(@PathVariable Integer id){
+            return this.productService.deleteCustomerById(id)
+                    .filter(aBoolean -> aBoolean)
+                    .map(aBoolean -> ResponseEntity.ok().build())
+                    .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @GetMapping(value = "findByUserId/{userId}")
