@@ -108,10 +108,9 @@ public class UserController {
 
     @GetMapping("getUserContactInfo/{id}")
     public ResponseEntity<UserCustomerContactInfo> getUserContactInfo(@PathVariable String id) {
-        log.info("Inside getUserContactInfo " +id);
+        log.info("Inside getUserContactInfo " + id);
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserContactInfo(id));
     }
-
 
 
     @Operation(
@@ -175,16 +174,16 @@ public class UserController {
     @Retry(name = "findByEmailContaining", fallbackMethod = "findByEmailContainingFallback")
     @GetMapping("findByEmailContaining/{email}")
     public ResponseEntity<List<UserDto>> findByEmailContaining(@PathVariable
-                                                         @Email(message = "Please provide valid Email")
-                                                         String email) {
+                                                               @Email(message = "Please provide valid Email")
+                                                               String email) {
         log.info("Inside findByEmailContaining ");
-        throw  new RuntimeException();
+        throw new RuntimeException();
         //return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
     }
 
     @GetMapping("findUsersWithMailPreference/{email}")
-    public ResponseEntity<List<UserDto>> findUsersWithMailPreference(String email) {
-        log.info("Inside findByEmailContainingFallback  ");
+    public ResponseEntity<List<UserDto>> findUsersWithMailPreference(@PathVariable String email) {
+        log.info("Inside findUsersWithMailPreference  " + email);
         List<UserDto> userDtoList = new ArrayList<>();
         userService.findUsersWithMailPreference(Boolean.valueOf(email))
                 .forEach(user -> userDtoList.add(MapperClass.getUserDto(user)));

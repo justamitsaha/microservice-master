@@ -116,10 +116,10 @@ public class UserService {
     public List<User> findUsersWithMailPreference(Boolean okToMail) {
         Random random = new Random();
         boolean bool = random.nextBoolean();
-        log.info("Query type " + (bool ? "Fetching preference with native query" : "Fetching with JPQL"));
+        log.info("findUsersWithMailPreference input " + okToMail + (bool ? " JPQL " : "NATIVE"));
         if (bool)
-           return userRepository.findUsersWithMailPreferenceNative(okToMail);
-        else
             return userRepository.findUsersWithMailPreference(okToMail);
+        else
+            return userRepository.findUsersWithMailPreferenceNative(okToMail);
     }
 }

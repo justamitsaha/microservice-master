@@ -1,6 +1,7 @@
 package com.saha.amit.util;
 
 import com.saha.amit.dto.UserDto;
+import com.saha.amit.dto.UserPreferenceDto;
 import com.saha.amit.entity.User;
 import com.saha.amit.entity.UserPreference;
 
@@ -34,6 +35,13 @@ public class MapperClass {
         userDto.setPassword(user.getPassword());
         userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setRole(user.getRole());
+        UserPreferenceDto userPreferenceDto = new UserPreferenceDto(
+                user.getUserPreferenceReference().isOkToPush(),
+                user.getUserPreferenceReference().isOkToMail(),
+                user.getUserPreferenceReference().isOkToSms(),
+                user.getUserPreferenceReference().getTimeStamp()
+        );
+        userDto.setUserPreferenceDto(userPreferenceDto);
         return userDto;
     }
 

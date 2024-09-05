@@ -15,7 +15,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class UserDto {
 
     @Schema(
@@ -37,7 +36,7 @@ public class UserDto {
     )
     private String email;
     @NotEmpty(message = "Please provide email")
-    @Pattern(regexp = "\\d{10}" , message = "Please enter valid phone no")
+    @Pattern(regexp = "\\d{10}", message = "Please enter valid phone no")
     @Schema(
             description = "User Phone no", example = "9999999911"
     )
