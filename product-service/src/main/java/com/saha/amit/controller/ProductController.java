@@ -98,12 +98,13 @@ public class ProductController {
     @GetMapping(value = "getAllProduct", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<Flux<ProductDto>> getAllProduct() {
         log.info("Inside getAllProduct");
-        return ResponseEntity.status(HttpStatus.FOUND).body(productService.getAllProduct().delayElements(Duration.ofMillis(500)));
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getAllProduct().delayElements(Duration.ofMillis(500)));
     }
 
-    @GetMapping(value = "getAllProductPage", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public ResponseEntity<Flux<ProductDto>> getAllProductPage(@RequestParam(defaultValue = "1") Integer page,
+    @GetMapping(value = "getAllProductPage")
+    public Mono<List<ProductDto>> getAllProductPage(@RequestParam(defaultValue = "1") Integer page,
                                                               @RequestParam(defaultValue = "10") Integer size) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(productService.getAllProductPage(page, size).delayElements(Duration.ofMillis(500)));
+        return productService.getAllProductPage(page,size).collectList();
+        //return ResponseEntity.status(HttpStatus.FOUND).body(productService.getAllProductPage(page, size).delayElements(Duration.ofMillis(500)));
     }
 }
