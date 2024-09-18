@@ -1,8 +1,10 @@
 package com.saha.amit.controller;
 
 import com.saha.amit.dto.ProductDto;
+import com.saha.amit.exception.CustomerNotFindException;
 import com.saha.amit.service.ProductService;
 import com.saha.amit.util.Mapper;
+import jakarta.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class ProductController {
     }
 
     @PostMapping("save/private")
-    public ResponseEntity<Mono<ProductDto>> privateSave(@RequestBody ProductDto productDto, @RequestHeader("userId") String userId) {
+    public ResponseEntity<Mono<ProductDto>> privateSave(@Valid @RequestBody ProductDto productDto, @RequestHeader("userId") String userId) {
         productDto.setUserId(Integer.parseInt(userId));
         log.info("Inside ProductController save " + productDto.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
@@ -68,7 +70,8 @@ public class ProductController {
         //return ResponseEntity.status(HttpStatus.FOUND).body(productService.findById(id));
         return productService.findById(id)
                 .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                .switchIfEmpty(Mono.error(new CustomerNotFindException(id)));
+                //.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @DeleteMapping("{id}")
@@ -76,7 +79,8 @@ public class ProductController {
             return this.productService.deleteCustomerById(id)
                     .filter(aBoolean -> aBoolean)
                     .map(aBoolean -> ResponseEntity.ok().<Void>build())
-                    .defaultIfEmpty(ResponseEntity.notFound().build());
+                    .switchIfEmpty(Mono.error(new CustomerNotFindException(id)));
+                    //.defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @GetMapping(value = "findByUserId/{userId}")

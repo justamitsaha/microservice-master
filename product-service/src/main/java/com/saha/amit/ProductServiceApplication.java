@@ -54,7 +54,7 @@ public class ProductServiceApplication implements CommandLineRunner {
             ProductDto productDto = new ProductDto(
                     faker.commerce().productName(),
                     faker.howIMetYourMother().catchPhrase(),
-                    faker.random().nextInt(1, 10000),
+                    faker.random().nextInt(50, 10000),
                     faker.funnyName().name(),
                     faker.random().nextInt(1,10),
                     1,
