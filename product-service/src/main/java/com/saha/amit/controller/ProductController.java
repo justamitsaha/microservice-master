@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<Mono<ProductDto>> save(@RequestBody ProductDto productDto, @RequestHeader("userId") String userId) {
+    public ResponseEntity<Mono<ProductDto>> save(@Valid @RequestBody ProductDto productDto, @RequestHeader("userId") String userId) {
         productDto.setUserId(Integer.parseInt(userId));
         log.info("Inside ProductController save " + productDto.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
@@ -85,7 +85,7 @@ public class ProductController {
 
     @GetMapping(value = "findByUserId/{userId}")
     public ResponseEntity<Flux<ProductDto>> findByUserId(@PathVariable int userId) {
-        log.info("Inside findByUserId");
+        log.info("Inside findByUserId " +userId);
         return ResponseEntity.status(HttpStatus.OK).body(productService.findByUserId(userId));
     }
 

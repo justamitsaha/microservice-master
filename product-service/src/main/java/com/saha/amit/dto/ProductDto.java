@@ -3,16 +3,19 @@ package com.saha.amit.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class ProductDto {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int productId;
-    @NotEmpty
+    @NotEmpty()
+    @NotNull()
     private String productName;
-    @NotEmpty
+    @NotEmpty()
+    @NotNull()
     private String productDescription;
-    @NotEmpty
+    @NotNull()
     @Min(10) private int price;
     private String imagePath;
 

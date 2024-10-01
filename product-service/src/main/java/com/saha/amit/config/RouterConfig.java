@@ -21,10 +21,11 @@ public class RouterConfig {
     @Bean
     public RouterFunction<ServerResponse> routerFunction() {
         return RouterFunctions.route()
-                .POST("save", requestHandler::save)
-                .POST("saveAll", request -> requestHandler.saveAll(request))
-                .GET("findByCategory", request -> requestHandler.findByCategory(request))
-                .GET("findByPrice", request -> requestHandler.findByPriceBetween(request))
+                .POST("product/route/save", requestHandler::save)
+                .POST("product/route/saveAll", request -> requestHandler.saveAll(request))
+                .GET("product/route/findById/{id}", request -> requestHandler.findById(request))
+                .GET("product/route/findByCategory", request -> requestHandler.findByCategory(request))
+                .GET("product/route/findByPrice", request -> requestHandler.findByPriceBetween(request))
                 .build();
     }
 
