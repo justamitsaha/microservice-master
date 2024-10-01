@@ -7,15 +7,9 @@ import jakarta.validation.constraints.Pattern;
 
 
 public class UserDto {
-
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int id;
-
     @NotEmpty(message = "Please provide a name")
-
     private String name;
-
     @NotEmpty(message = "Please provide email")
     @Email(message = "Please provide a valid Email")
 

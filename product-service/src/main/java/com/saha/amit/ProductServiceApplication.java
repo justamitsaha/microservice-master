@@ -57,7 +57,7 @@ public class ProductServiceApplication implements CommandLineRunner {
                     faker.random().nextInt(50, 10000),
                     faker.funnyName().name(),
                     faker.random().nextInt(1,10),
-                    1,
+                    faker.random().nextInt(1,4),
                     "Amit Saha");
             log.info(productDto.toString());
             productService.save(productDto).subscribe(log::info);
