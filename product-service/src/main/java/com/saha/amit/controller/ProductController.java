@@ -59,43 +59,46 @@ public class ProductController {
     }
 
     @PostMapping(value = "saveAll", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public ResponseEntity<Flux<ProductDto>> saveAll(List<ProductDto> productDtoList, @RequestHeader("userId") String userId) {
+    public ResponseEntity<Flux<ProductDto>> saveAll(@RequestBody  List<ProductDto> productDtoList, @RequestHeader("userId") String userId) {
+        log.info("Inside saveAll by user "+ userId);
         productDtoList.forEach(productDto ->
                 productDto.setProductId(Integer.parseInt(userId)));
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveAll(productDtoList));
     }
 
+    @DeleteMapping("{id}")
+    public Mono<ResponseEntity<Boolean>> deleteCustomerById(@PathVariable Integer id) {
+        return this.productService.deleteCustomerById(id)
+                .filter(aBoolean -> aBoolean)
+                //.map(aBoolean -> ResponseEntity.ok().<Void>build())       // if we want to return void
+                .map(aBoolean -> ResponseEntity.ok().body(aBoolean))
+                .switchIfEmpty(Mono.error(new CustomerNotFindException(id)));
+        //.defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
     @GetMapping(value = "findById/{id}")
     public Mono<ResponseEntity<ProductDto>> findById(@PathVariable int id) {
-        //return ResponseEntity.status(HttpStatus.FOUND).body(productService.findById(id));
         return productService.findById(id)
                 .map(ResponseEntity::ok)
                 .switchIfEmpty(Mono.error(new CustomerNotFindException(id)));
-                //.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        //.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @DeleteMapping("{id}")
-    public Mono<ResponseEntity<Void>>  deleteCustomerById(@PathVariable Integer id){
-            return this.productService.deleteCustomerById(id)
-                    .filter(aBoolean -> aBoolean)
-                    .map(aBoolean -> ResponseEntity.ok().<Void>build())
-                    .switchIfEmpty(Mono.error(new CustomerNotFindException(id)));
-                    //.defaultIfEmpty(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping(value = "findByUserId/{userId}")
+    @GetMapping(value = "findByUserId/{userId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<Flux<ProductDto>> findByUserId(@PathVariable int userId) {
-        log.info("Inside findByUserId " +userId);
+        log.info("Inside findByUserId " + userId);
         return ResponseEntity.status(HttpStatus.OK).body(productService.findByUserId(userId));
     }
 
     @GetMapping(value = "search/{category}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<Flux<ProductDto>> findByCategoryId(@PathVariable int category) {
+        log.info("Inside findByCategoryId " + category);
         return ResponseEntity.status(HttpStatus.FOUND).body(productService.findByCategoryId(category).delayElements(Duration.ofMillis(500)));
     }
 
-    @GetMapping(value = "search/{price1}/{price2}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public ResponseEntity<Flux<ProductDto>> findByPriceBetween(@PathVariable Double price1, @PathVariable Double price2) {
+    @GetMapping(value = "search", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public ResponseEntity<Flux<ProductDto>> findByPriceBetween(@RequestParam Double price1, @RequestParam Double price2) {
+        log.info("Inside findByPriceBetween " + price1 +" "+price2);
         return ResponseEntity.status(HttpStatus.FOUND).body(productService.findByPriceBetween(price1, price2).delayElements(Duration.ofMillis(500)));
     }
 
@@ -107,8 +110,8 @@ public class ProductController {
 
     @GetMapping(value = "getAllProductPage")
     public Mono<List<ProductDto>> getAllProductPage(@RequestParam(defaultValue = "1") Integer page,
-                                                              @RequestParam(defaultValue = "10") Integer size) {
-        return productService.getAllProductPage(page,size).collectList();
+                                                    @RequestParam(defaultValue = "10") Integer size) {
+        return productService.getAllProductPage(page, size).collectList();
         //return ResponseEntity.status(HttpStatus.FOUND).body(productService.getAllProductPage(page, size).delayElements(Duration.ofMillis(500)));
     }
 }

@@ -27,9 +27,9 @@ public class ProductControllerAdvice {
     @ExceptionHandler(RuntimeException.class)
     public ProblemDetail handleException(RuntimeException runtimeException){
         log.error(runtimeException);
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND,runtimeException.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR,runtimeException.getMessage());
         problemDetail.setType(URI.create("https://www.youtube.com/"));
-        problemDetail.setTitle("Customer not find");
+        problemDetail.setTitle(runtimeException.getMessage());
         return problemDetail;
     }
 }

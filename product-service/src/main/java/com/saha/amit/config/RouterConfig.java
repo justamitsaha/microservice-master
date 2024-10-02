@@ -23,9 +23,11 @@ public class RouterConfig {
         return RouterFunctions.route()
                 .POST("product/route/save", requestHandler::save)
                 .POST("product/route/saveAll", request -> requestHandler.saveAll(request))
+                .DELETE("product/route/{id}", request -> requestHandler.deleteCustomerById(request))
                 .GET("product/route/findById/{id}", request -> requestHandler.findById(request))
-                .GET("product/route/findByCategory", request -> requestHandler.findByCategory(request))
-                .GET("product/route/findByPrice", request -> requestHandler.findByPriceBetween(request))
+                .GET("product/route/findByUserId/{userId}", request -> requestHandler.findByUserId(request))
+                .GET("product/route/search/{category}", request -> requestHandler.findByCategory(request))
+                .GET("product/route/search", request -> requestHandler.findByPriceBetween(request))
                 .build();
     }
 

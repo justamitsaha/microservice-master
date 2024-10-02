@@ -269,14 +269,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:8080/authentication/user/findById/1"
+								"url": "/authentication/user/findById/3"
 							},
 							"response": []
 						},
@@ -433,6 +433,54 @@
 							]
 						},
 						{
+							"name": "SaveProduct",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "userId",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\",\r\n    \"categoryId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "/product/route/save"
+							},
+							"response": []
+						},
+						{
+							"name": "SaveAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "userId",
+										"value": "1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n  {\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"categoryName\": \"electronics\",\r\n    \"imagePath\": \"hjfh\",\r\n    \"categoryId\": 1\r\n  },\r\n  {\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 19000,\r\n    \"productName\": \"iPhone\",\r\n    \"categoryName\": \"electronics\",\r\n    \"imagePath\": \"hjfh\",\r\n    \"categoryId\": 1\r\n  }\r\n]\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "/product/route/saveAll"
+							},
+							"response": []
+						},
+						{
 							"name": "AuthSaveProduct",
 							"request": {
 								"auth": {
@@ -464,43 +512,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/product/save/private"
-							},
-							"response": []
-						},
-						{
-							"name": "Search_product_by_price",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "http://localhost:8080/product/search/2000/5000"
-							},
-							"response": []
-						},
-						{
-							"name": "Find_producyt_by_id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "/product/route/findById/100"
-							},
-							"response": []
-						},
-						{
-							"name": "Find_product_by_user_id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "http://localhost:8080/product/findByUserId/0"
-							},
-							"response": []
-						},
-						{
-							"name": "Find_product_category",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "product/search/0"
+								"url": "/product/save/private"
 							},
 							"response": []
 						},
@@ -509,7 +521,64 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
-								"url": "/product/100"
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": "/product/route/101"
+							},
+							"response": []
+						},
+						{
+							"name": "FindByID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "/product/route/findById/100"
+							},
+							"response": []
+						},
+						{
+							"name": "FindByUserID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "/product/route/findByUserId/1"
+							},
+							"response": []
+						},
+						{
+							"name": "FindByCategory",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "/product/route/search/1"
+							},
+							"response": []
+						},
+						{
+							"name": "FindByPriceBetween",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "/product/route/search?price1=2000&price2=5000",
+									"path": [
+										"product",
+										"route",
+										"search"
+									],
+									"query": [
+										{
+											"key": "price1",
+											"value": "2000"
+										},
+										{
+											"key": "price2",
+											"value": "5000"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -540,30 +609,6 @@
 										}
 									]
 								}
-							},
-							"response": []
-						},
-						{
-							"name": "SaveProduct",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "userId",
-										"value": "1",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\",\r\n    \"categoryId\": 1\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "/product/route/save"
 							},
 							"response": []
 						}
