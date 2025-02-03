@@ -33,6 +33,14 @@ public class RoutingConfiguration {
                                         .setMethods(HttpMethod.GET)
                                         .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
                         .uri("lb://PRODUCT-SERVICE"))
+                .route(p -> p
+                        .path("/product/actuator/**")
+                        .filters(gatewayFilterSpec -> gatewayFilterSpec
+                                .rewritePath("/product/actuator/(?<segment>.*)", "/actuator/${segment}")
+                                .retry(retryConfig -> retryConfig.setRetries(3)
+                                        .setMethods(HttpMethod.GET)
+                                        .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
+                        .uri("lb://PRODUCT-SERVICE"))
                 .build();
     }
 }

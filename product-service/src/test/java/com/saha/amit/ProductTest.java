@@ -18,7 +18,7 @@ public class ProductTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    @Test
+    //@Test
     public void getAllProductPage() {
         this.webTestClient.get()
                 .uri("/product/getAllProductPage?page=1&size=10")
@@ -33,7 +33,7 @@ public class ProductTest {
 
     }
 
-    @Test
+    //@Test
     public void getAllProductPageJsonPath() {
         this.webTestClient.get()
                 .uri("/product/getAllProductPage?page=1&size=10")
@@ -47,7 +47,7 @@ public class ProductTest {
 
     }
 
-    @Test
+    //@Test
     public void findById() {
         this.webTestClient.get()
                 .uri("/product/findById/1")

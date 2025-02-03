@@ -5,7 +5,7 @@ metadata:
   labels:
     app: gateway-service
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: gateway-service
@@ -18,7 +18,7 @@ spec:
         - name: gateway-service
           image: justamitsaha/ms-gateway-service:2Kube
           ports:
-            - containerPort: 8071
+            - containerPort: 8080
           env:
           - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
             valueFrom:

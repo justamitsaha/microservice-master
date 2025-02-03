@@ -5,7 +5,7 @@ metadata:
   labels:
     app: discovery-service
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: discovery-service
@@ -18,7 +18,7 @@ spec:
         - name: discovery-service
           image: justamitsaha/ms-discovery-service:2Kube
           ports:
-            - containerPort: 8071
+            - containerPort: 8081
 ---
 apiVersion: v1
 kind: Service

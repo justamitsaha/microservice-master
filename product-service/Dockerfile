@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y curl
 #Information around who maintains the image
 MAINTAINER justamitsaha@gmail.com
 
-EXPOSE 8080
+EXPOSE 8091
 
 # Add the application's jar to the container
 COPY target/product-service-999.jar product-service-999.jar

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: product-service
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: product-service
@@ -18,7 +18,7 @@ spec:
         - name: product-service
           image: justamitsaha/ms-product-service:2Kube
           ports:
-            - containerPort: 8071
+            - containerPort: 8090
           env:
           - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
             valueFrom:

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the Docker image tag
-DOCKER_TAG="1gateway"
+DOCKER_TAG="2Kube"
 
 echo "Current Path: $(pwd)"
 

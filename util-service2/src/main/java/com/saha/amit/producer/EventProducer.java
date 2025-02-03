@@ -72,7 +72,7 @@ public class EventProducer {
 
         ProducerRecord<String, String> producerRecord = buildProducerRecord(key, value, "product");
 
-        var completableFuture = kafkaTemplate.send("product", key, value);
+        var completableFuture = kafkaTemplate.send(producerRecord);
         return completableFuture.whenComplete((stringStringSendResult, throwable) ->
         {
             if (null != throwable)
