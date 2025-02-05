@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("configuration")
 public class ConfigurationController {
 
-    private Log log = LogFactory.getLog(ConfigurationController.class);
+    private final Log log = LogFactory.getLog(ConfigurationController.class);
 
     @Value("${api.info}")
     private String buildVersion;
