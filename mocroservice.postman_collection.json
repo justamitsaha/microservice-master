@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "33fdd532-cede-4b00-85f2-48c9b1bb20ac",
 		"name": "mocroservice",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12621221"
 	},
 	"item": [
@@ -26,7 +26,18 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/user/create"
+								"url": {
+									"raw": "http://localhost:8080/user/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"create"
+									]
+								}
 							},
 							"response": []
 						},
@@ -47,7 +58,19 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/user/findById/1"
+								"url": {
+									"raw": "http://localhost:8080/user/findById/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"findById",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
@@ -68,7 +91,19 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/user/findByEmailContaining/007@mailinator.com"
+								"url": {
+									"raw": "http://localhost:8080/user/findByEmailContaining/007@mailinator.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"findByEmailContaining",
+										"007@mailinator.com"
+									]
+								}
 							},
 							"response": []
 						},
@@ -111,7 +146,18 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "http://localhost:8081/configuration/api-info"
+										"url": {
+											"raw": "http://localhost:8081/configuration/api-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8081",
+											"path": [
+												"configuration",
+												"api-info"
+											]
+										}
 									},
 									"response": []
 								},
@@ -120,7 +166,18 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "http://localhost:8081/configuration/env-variables"
+										"url": {
+											"raw": "http://localhost:8081/configuration/env-variables",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8081",
+											"path": [
+												"configuration",
+												"env-variables"
+											]
+										}
 									},
 									"response": []
 								},
@@ -129,7 +186,18 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "http://localhost:8081/configuration/contact-info"
+										"url": {
+											"raw": "http://localhost:8081/configuration/contact-info",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8081",
+											"path": [
+												"configuration",
+												"contact-info"
+											]
+										}
 									},
 									"response": []
 								}
@@ -154,7 +222,18 @@
 										}
 									}
 								},
-								"url": "http://localhost:8081/product/save"
+								"url": {
+									"raw": "http://localhost:8081/product/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"product",
+										"save"
+									]
+								}
 							},
 							"response": []
 						},
@@ -163,7 +242,20 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8081/product/search/2000/5000"
+								"url": {
+									"raw": "http://localhost:8081/product/search/2000/5000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"product",
+										"search",
+										"2000",
+										"5000"
+									]
+								}
 							},
 							"response": []
 						},
@@ -172,7 +264,19 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8081/product/findById/101"
+								"url": {
+									"raw": "http://localhost:8081/product/findById/101",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"product",
+										"findById",
+										"101"
+									]
+								}
 							},
 							"response": []
 						}
@@ -186,7 +290,18 @@
 							"request": {
 								"method": "POST",
 								"header": [],
-								"url": "http://localhost:8071/actuator/refresh"
+								"url": {
+									"raw": "http://localhost:8071/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
 							},
 							"response": []
 						},
@@ -195,7 +310,18 @@
 							"request": {
 								"method": "POST",
 								"header": [],
-								"url": "http://localhost:8081/actuator/refresh"
+								"url": {
+									"raw": "http://localhost:8081/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
 							},
 							"response": []
 						}
@@ -209,7 +335,18 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8071/product-service/default"
+								"url": {
+									"raw": "http://localhost:8071/product-service/default",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"product-service",
+										"default"
+									]
+								}
 							},
 							"response": []
 						},
@@ -227,7 +364,17 @@
 										}
 									}
 								},
-								"url": "http://localhost:8071/encrypt"
+								"url": {
+									"raw": "http://localhost:8071/encrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"encrypt"
+									]
+								}
 							},
 							"response": []
 						}
@@ -242,6 +389,83 @@
 					"name": "Identity-service",
 					"item": [
 						{
+							"name": "Configuration-service",
+							"item": [
+								{
+									"name": "Configuration-API-info",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "/auth/configuration/api-info",
+											"path": [
+												"auth",
+												"configuration",
+												"api-info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-enviornment",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "/auth/configuration/env-variables",
+											"path": [
+												"auth",
+												"configuration",
+												"env-variables"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Configuration-Contact-class",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "/auth/configuration/contact-info",
+											"path": [
+												"auth",
+												"configuration",
+												"contact-info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Actuator refresh",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "/auth/actuator/refresh",
+											"path": [
+												"auth",
+												"actuator",
+												"refresh"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "User_create",
 							"request": {
 								"method": "POST",
@@ -255,7 +479,19 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/authentication/user/create"
+								"url": {
+									"raw": "http://localhost:8080/authentication/user/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user",
+										"create"
+									]
+								}
 							},
 							"response": []
 						},
@@ -276,7 +512,15 @@
 										}
 									}
 								},
-								"url": "/authentication/user/findById/3"
+								"url": {
+									"raw": "/authentication/user/findById/4",
+									"path": [
+										"authentication",
+										"user",
+										"findById",
+										"4"
+									]
+								}
 							},
 							"response": []
 						},
@@ -288,16 +532,48 @@
 							"request": {
 								"auth": {
 									"type": "oauth2",
-									"oauth2": {
-										"clientSecret": "Y0COvHtABHy7SHptkSfs91Ov2pIxbjbx",
-										"client_authentication": "body",
-										"scope": "openid email profile",
-										"clientId": "microservice",
-										"accessTokenUrl": "http://localhost:7080/realms/master/protocol/openid-connect/token",
-										"grant_type": "client_credentials",
-										"tokenName": "clientcredentials_accesstoken",
-										"addTokenTo": "header"
-									}
+									"oauth2": [
+										{
+											"key": "clientSecret",
+											"value": "Y0COvHtABHy7SHptkSfs91Ov2pIxbjbx",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "openid email profile",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "microservice",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "clientcredentials_accesstoken",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
 								},
 								"method": "GET",
 								"header": [
@@ -316,7 +592,21 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/authentication/user/private/findById/1"
+								"url": {
+									"raw": "http://localhost:8080/authentication/user/private/findById/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user",
+										"private",
+										"findById",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
@@ -337,7 +627,20 @@
 										}
 									}
 								},
-								"url": "http://localhost:8080/auth/user/findByEmailContaining/007@mailinator.com"
+								"url": {
+									"raw": "http://localhost:8080/auth/user/findByEmailContaining/007@mailinator.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"user",
+										"findByEmailContaining",
+										"007@mailinator.com"
+									]
+								}
 							},
 							"response": []
 						},
@@ -373,7 +676,18 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8080/authentication/user"
+								"url": {
+									"raw": "http://localhost:8080/authentication/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user"
+									]
+								}
 							},
 							"response": []
 						},
@@ -382,7 +696,20 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8080/authentication/user/getUserContactInfo/2"
+								"url": {
+									"raw": "http://localhost:8080/authentication/user/getUserContactInfo/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user",
+										"getUserContactInfo",
+										"2"
+									]
+								}
 							},
 							"response": []
 						},
@@ -391,7 +718,20 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8080/auth/user/findUsersWithMailPreference/true"
+								"url": {
+									"raw": "http://localhost:8080/auth/user/findUsersWithMailPreference/true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"user",
+										"findUsersWithMailPreference",
+										"true"
+									]
+								}
 							},
 							"response": []
 						}
@@ -400,38 +740,6 @@
 				{
 					"name": "Product-Service",
 					"item": [
-						{
-							"name": "Configuration-service",
-							"item": [
-								{
-									"name": "Configuration-API-info",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": "http://localhost:8080/product/configuration/api-info"
-									},
-									"response": []
-								},
-								{
-									"name": "Configuration-enviornment",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": "http://localhost:8080/product/configuration/env-variables"
-									},
-									"response": []
-								},
-								{
-									"name": "Configuration-Contact-class",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": "http://localhost:8080/product/configuration/contact-info"
-									},
-									"response": []
-								}
-							]
-						},
 						{
 							"name": "SaveProduct",
 							"request": {
@@ -452,7 +760,14 @@
 										}
 									}
 								},
-								"url": "/product/route/save"
+								"url": {
+									"raw": "/product/route/save",
+									"path": [
+										"product",
+										"route",
+										"save"
+									]
+								}
 							},
 							"response": []
 						},
@@ -476,7 +791,14 @@
 										}
 									}
 								},
-								"url": "/product/route/saveAll"
+								"url": {
+									"raw": "/product/route/saveAll",
+									"path": [
+										"product",
+										"route",
+										"saveAll"
+									]
+								}
 							},
 							"response": []
 						},
@@ -485,16 +807,48 @@
 							"request": {
 								"auth": {
 									"type": "oauth2",
-									"oauth2": {
-										"clientSecret": "eer84SMYhfPWa9pHN84nv7IGXXWR5cfm",
-										"clientId": "microservice",
-										"client_authentication": "body",
-										"scope": "openid email profile",
-										"accessTokenUrl": "http://localhost:7080/realms/master/protocol/openid-connect/token",
-										"grant_type": "client_credentials",
-										"tokenName": "clientcredentials_accesstoken",
-										"addTokenTo": "header"
-									}
+									"oauth2": [
+										{
+											"key": "clientSecret",
+											"value": "eer84SMYhfPWa9pHN84nv7IGXXWR5cfm",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "microservice",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "openid email profile",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "clientcredentials_accesstoken",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
 								},
 								"method": "POST",
 								"header": [
@@ -512,7 +866,14 @@
 										}
 									}
 								},
-								"url": "/product/save/private"
+								"url": {
+									"raw": "/product/save/private",
+									"path": [
+										"product",
+										"save",
+										"private"
+									]
+								}
 							},
 							"response": []
 						},
@@ -525,7 +886,14 @@
 									"mode": "urlencoded",
 									"urlencoded": []
 								},
-								"url": "/product/route/101"
+								"url": {
+									"raw": "/product/route/101",
+									"path": [
+										"product",
+										"route",
+										"101"
+									]
+								}
 							},
 							"response": []
 						},
@@ -534,7 +902,15 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "/product/route/findById/100"
+								"url": {
+									"raw": "/product/route/findById/100",
+									"path": [
+										"product",
+										"route",
+										"findById",
+										"100"
+									]
+								}
 							},
 							"response": []
 						},
@@ -543,7 +919,15 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "/product/route/findByUserId/1"
+								"url": {
+									"raw": "/product/route/findByUserId/1",
+									"path": [
+										"product",
+										"route",
+										"findByUserId",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
@@ -552,7 +936,15 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "/product/route/search/1"
+								"url": {
+									"raw": "/product/route/search/1",
+									"path": [
+										"product",
+										"route",
+										"search",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
@@ -611,6 +1003,22 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Actuator-Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "/product/actuator/refresh",
+									"path": [
+										"product",
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -622,16 +1030,18 @@
 							"request": {
 								"method": "POST",
 								"header": [],
-								"url": "http://localhost:8071/actuator/refresh"
-							},
-							"response": []
-						},
-						{
-							"name": "Actuator-Product",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": "http://localhost:8081/actuator/refresh"
+								"url": {
+									"raw": "http://localhost:8071/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
 							},
 							"response": []
 						}
@@ -641,11 +1051,32 @@
 					"name": "ConfigServer",
 					"item": [
 						{
-							"name": "Config-Get_properties",
+							"name": "Config-default",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8071/product-service/default"
+								"url": {
+									"raw": "/identity-service/default",
+									"path": [
+										"identity-service",
+										"default"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Config-Prod",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "/identity-service/prod",
+									"path": [
+										"identity-service",
+										"prod"
+									]
+								}
 							},
 							"response": []
 						},
@@ -656,16 +1087,94 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "johns@mailinator.com",
+									"raw": "sapu@bapu.com",
 									"options": {
 										"raw": {
 											"language": "text"
 										}
 									}
 								},
-								"url": "http://localhost:8071/encrypt"
+								"url": {
+									"raw": "http://localhost:8071/encrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"encrypt"
+									]
+								}
 							},
 							"response": []
+						},
+						{
+							"name": "Decrypt",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "f5a08fe2d89da3c88f7850a3483641bb69e7cad85890e9a051c3b07b1b11c708",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8071/decrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"decrypt"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actuator refresh post",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "/actuator/refresh",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									"pm.request.url.port=\"8071\""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
 						}
 					]
 				},
@@ -677,7 +1186,18 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8080/actuator/circuitbreakers"
+								"url": {
+									"raw": "http://localhost:8080/actuator/circuitbreakers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"circuitbreakers"
+									]
+								}
 							},
 							"response": []
 						},
@@ -726,7 +1246,17 @@
 										}
 									}
 								},
-								"url": "http://localhost:8083/email"
+								"url": {
+									"raw": "http://localhost:8083/email",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"email"
+									]
+								}
 							},
 							"response": []
 						},
@@ -744,7 +1274,17 @@
 										}
 									}
 								},
-								"url": "http://localhost:8082/sms"
+								"url": {
+									"raw": "http://localhost:8082/sms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"sms"
+									]
+								}
 							},
 							"response": []
 						},
@@ -762,7 +1302,17 @@
 										}
 									}
 								},
-								"url": "http://localhost:8082/emailsms"
+								"url": {
+									"raw": "http://localhost:8082/emailsms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"emailsms"
+									]
+								}
 							},
 							"response": []
 						}
@@ -791,7 +1341,18 @@
 										}
 									}
 								},
-								"url": "http://localhost:8082/product/save"
+								"url": {
+									"raw": "http://localhost:8082/product/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"product",
+										"save"
+									]
+								}
 							},
 							"response": []
 						}
@@ -806,8 +1367,10 @@
 						"packages": {},
 						"exec": [
 							"pm.request.url.protocol=\"http\"\r",
+							"// pm.request.url.host=\"192.168.0.143\"\r",
 							"pm.request.url.host=\"localhost\"\r",
-							"pm.request.url.port=\"8091\"\r",
+							"// pm.request.url.host=\"34.56.195.171\"\r",
+							"pm.request.url.port=\"8080\"\r",
 							""
 						]
 					}
@@ -844,7 +1407,22 @@
 										}
 									}
 								},
-								"url": "http://192.168.0.143:8080/authentication/user/create"
+								"url": {
+									"raw": "http://192.168.0.143:8080/authentication/user/create",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"0",
+										"143"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user",
+										"create"
+									]
+								}
 							},
 							"response": []
 						},
@@ -865,7 +1443,23 @@
 										}
 									}
 								},
-								"url": "http://192.168.0.143:8080/authentication/user/findById/5"
+								"url": {
+									"raw": "http://192.168.0.143:8080/authentication/user/findById/5",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"0",
+										"143"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user",
+										"findById",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
@@ -886,7 +1480,23 @@
 										}
 									}
 								},
-								"url": "http://192.168.0.143:8080/auth/user/findByEmailContaining/007@mailinator.com"
+								"url": {
+									"raw": "http://192.168.0.143:8080/auth/user/findByEmailContaining/007@mailinator.com",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"0",
+										"143"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"user",
+										"findByEmailContaining",
+										"007@mailinator.com"
+									]
+								}
 							},
 							"response": []
 						},
@@ -933,7 +1543,22 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "http://192.168.0.143:8080/product/configuration/api-info"
+										"url": {
+											"raw": "http://192.168.0.143:8080/product/configuration/api-info",
+											"protocol": "http",
+											"host": [
+												"192",
+												"168",
+												"0",
+												"143"
+											],
+											"port": "8080",
+											"path": [
+												"product",
+												"configuration",
+												"api-info"
+											]
+										}
 									},
 									"response": []
 								},
@@ -942,7 +1567,22 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "http://192.168.0.143:8080/product/configuration/env-variables"
+										"url": {
+											"raw": "http://192.168.0.143:8080/product/configuration/env-variables",
+											"protocol": "http",
+											"host": [
+												"192",
+												"168",
+												"0",
+												"143"
+											],
+											"port": "8080",
+											"path": [
+												"product",
+												"configuration",
+												"env-variables"
+											]
+										}
 									},
 									"response": []
 								},
@@ -951,7 +1591,22 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "http://192.168.0.143:8080/product/configuration/contact-info"
+										"url": {
+											"raw": "http://192.168.0.143:8080/product/configuration/contact-info",
+											"protocol": "http",
+											"host": [
+												"192",
+												"168",
+												"0",
+												"143"
+											],
+											"port": "8080",
+											"path": [
+												"product",
+												"configuration",
+												"contact-info"
+											]
+										}
 									},
 									"response": []
 								}
@@ -976,7 +1631,21 @@
 										}
 									}
 								},
-								"url": "http://192.168.0.143:8080/product/save"
+								"url": {
+									"raw": "http://192.168.0.143:8080/product/save",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"0",
+										"143"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"save"
+									]
+								}
 							},
 							"response": []
 						},
@@ -985,7 +1654,23 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://192.168.0.143:8080/product/search/2000/5000"
+								"url": {
+									"raw": "http://192.168.0.143:8080/product/search/2000/5000",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"0",
+										"143"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"search",
+										"2000",
+										"5000"
+									]
+								}
 							},
 							"response": []
 						},
@@ -994,7 +1679,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://192.168.0.143:8080/product/findById/100"
+								"url": {
+									"raw": "http://192.168.0.143:8080/product/findById/100",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"0",
+										"143"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"findById",
+										"100"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1008,7 +1708,18 @@
 							"request": {
 								"method": "POST",
 								"header": [],
-								"url": "http://localhost:8071/actuator/refresh"
+								"url": {
+									"raw": "http://localhost:8071/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
 							},
 							"response": []
 						},
@@ -1017,7 +1728,18 @@
 							"request": {
 								"method": "POST",
 								"header": [],
-								"url": "http://localhost:8081/actuator/refresh"
+								"url": {
+									"raw": "http://localhost:8081/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1031,7 +1753,18 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8071/product-service/default"
+								"url": {
+									"raw": "http://localhost:8071/product-service/default",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"product-service",
+										"default"
+									]
+								}
 							},
 							"response": []
 						},
@@ -1049,7 +1782,17 @@
 										}
 									}
 								},
-								"url": "http://localhost:8071/encrypt"
+								"url": {
+									"raw": "http://localhost:8071/encrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8071",
+									"path": [
+										"encrypt"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1097,7 +1840,21 @@
 								}
 							]
 						},
-						"url": "http://localhost:7080/realms/master/protocol/openid-connect/token"
+						"url": {
+							"raw": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"realms",
+								"master",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
 					},
 					"response": []
 				}
