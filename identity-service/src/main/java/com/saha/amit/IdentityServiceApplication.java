@@ -1,5 +1,6 @@
 package com.saha.amit;
 
+import com.saha.amit.dto.CompanyContactInfoDto;
 import com.saha.amit.dto.UserDto;
 import com.saha.amit.entity.UserPreference;
 import com.saha.amit.repository.UserPreferenceRepository;
@@ -11,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+@EnableConfigurationProperties(value = {CompanyContactInfoDto.class})
 @EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
 @SpringBootApplication
 @EnableFeignClients
