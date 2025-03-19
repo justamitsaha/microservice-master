@@ -15,9 +15,6 @@
         <module>config-server</module>
         <module>discovery-service</module>
         <module>gateway-service</module>
-        <module>util-service</module>
-        <module>util-service2</module>
-        <module>util-service3</module>
     </modules>
 
     <properties>

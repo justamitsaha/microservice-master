@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("configuration")
 public class ConfigurationController {
@@ -51,5 +55,31 @@ public class ConfigurationController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(companyContactInfoDto);
+    }
+
+    @GetMapping("/pod-info")
+    public ResponseEntity<Map<String, String>> getPodInfo() {
+        Map<String, String> podInfo = new HashMap<>();
+
+        try {
+            // Get hostname
+            String hostname = InetAddress.getLocalHost().getHostName();
+            podInfo.put("hostname", hostname);
+
+            // Get IP address
+            String ipAddress = InetAddress.getLocalHost().getHostAddress();
+            podInfo.put("ipAddress", ipAddress);
+
+            // If running in Kubernetes, you can also expose the pod name from environment variable
+            String podName = System.getenv("HOSTNAME");
+            if (podName != null) {
+                podInfo.put("podName", podName);
+            }
+
+            return ResponseEntity.ok(podInfo);
+        } catch (Exception e) {
+            podInfo.put("error", "Failed to retrieve pod information: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(podInfo);
+        }
     }
 }
