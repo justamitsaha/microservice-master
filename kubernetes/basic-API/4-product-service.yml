@@ -28,7 +28,7 @@ spec:
               done;
       containers:
         - name: product-service
-          image: justamitsaha/ms-product-service:2Kube
+          image: justamitsaha/ms-product-service:basic
           ports:
             - containerPort: 8091
           env:

@@ -28,7 +28,7 @@ spec:
               done
       containers:
         - name: identity-service
-          image: justamitsaha/ms-identity-service:2Kube
+          image: justamitsaha/ms-identity-service:basic
           ports:
             - containerPort: 8090
           env:

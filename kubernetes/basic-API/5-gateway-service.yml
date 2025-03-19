@@ -28,7 +28,7 @@ spec:
               done
       containers:
         - name: gateway-service
-          image: justamitsaha/ms-gateway-service:2Kube
+          image: justamitsaha/ms-gateway-service:basic
           ports:
             - containerPort: 8080
           env:

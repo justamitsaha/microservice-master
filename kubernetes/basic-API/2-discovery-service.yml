@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: discovery-service
-          image: justamitsaha/ms-discovery-service:2Kube
+          image: justamitsaha/ms-discovery-service:basic
           ports:
             - containerPort: 8081
           startupProbe:
