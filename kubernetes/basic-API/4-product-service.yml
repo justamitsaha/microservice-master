@@ -37,6 +37,10 @@ spec:
                 configMapKeyRef:
                   name: microservice-master-configmap
                   key: EUREKA_HOST
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: JAVA_OPTS
+              value: "-Duser.timezone=Asia/Kolkata"
           livenessProbe:
             exec:
               command:

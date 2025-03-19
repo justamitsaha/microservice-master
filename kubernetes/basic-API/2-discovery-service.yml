@@ -20,11 +20,16 @@ spec:
           image: justamitsaha/ms-discovery-service:basic
           ports:
             - containerPort: 8081
+          env:
+          - name: TZ
+            value: "Asia/Kolkata"
+          - name: JAVA_OPTS
+            value: "-Duser.timezone=Asia/Kolkata"
           startupProbe:
             httpGet:
               path: /actuator/health
               port: 8081
-            initialDelaySeconds: 10 # Wait 10 seconds before first check
+            initialDelaySeconds: 30 # Wait 10 seconds before first check
             periodSeconds: 5 # Check every 5 seconds
             failureThreshold: 6 # Fail after 6 unsuccessful checks
 

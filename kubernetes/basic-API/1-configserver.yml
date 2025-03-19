@@ -20,6 +20,11 @@ spec:
           image: justamitsaha/ms-config-server:basic
           ports:
             - containerPort: 8071
+          env:
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: JAVA_OPTS
+              value: "-Duser.timezone=Asia/Kolkata"
 ---
 apiVersion: v1
 kind: Service
