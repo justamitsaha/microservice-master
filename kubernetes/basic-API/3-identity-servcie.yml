@@ -44,7 +44,7 @@ spec:
           startupProbe:
             httpGet:
               path: /identity/actuator/health
-              port: 8081
+              port: 8090
             initialDelaySeconds: 30 # Wait 10 seconds before first check
             periodSeconds: 5 # Check every 5 seconds
             failureThreshold: 6 # Fail after 6 unsuccessful checks
