@@ -41,30 +41,30 @@ spec:
               value: "Asia/Kolkata"
             - name: JAVA_OPTS
               value: "-Duser.timezone=Asia/Kolkata"
-          startupProbe:
-            httpGet:
-              path: /identity/actuator/health
-              port: 8090
-            initialDelaySeconds: 30 # Wait 10 seconds before first check
-            periodSeconds: 5 # Check every 5 seconds
-            failureThreshold: 6 # Fail after 6 unsuccessful checks
-
-          livenessProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - >
-                  curl --fail --silent http://localhost:8090/identity/user/findById/1 | grep Amit || exit 1
-            initialDelaySeconds: 30
-            periodSeconds: 10
-
-          readinessProbe:
-            httpGet:
-              path: /identity/actuator/health
-              port: 8090
-            initialDelaySeconds: 30
-            periodSeconds: 10
+#          startupProbe:
+#            httpGet:
+#              path: /identity/actuator/health
+#              port: 8090
+#            initialDelaySeconds: 30 # Wait 10 seconds before first check
+#            periodSeconds: 5 # Check every 5 seconds
+#            failureThreshold: 6 # Fail after 6 unsuccessful checks
+#
+#          livenessProbe:
+#            exec:
+#              command:
+#                - /bin/sh
+#                - -c
+#                - >
+#                  curl --fail --silent http://localhost:8090/identity/user/findById/1 | grep Amit || exit 1
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#
+#          readinessProbe:
+#            httpGet:
+#              path: /identity/actuator/health
+#              port: 8090
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service

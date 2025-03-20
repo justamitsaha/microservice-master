@@ -41,21 +41,21 @@ spec:
               value: "Asia/Kolkata"
             - name: JAVA_OPTS
               value: "-Duser.timezone=Asia/Kolkata"
-          livenessProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - >
-                  curl --fail --silent http://localhost:8091/product/findById/100 | grep productDescription || exit 1
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /product/actuator/health
-              port: 8091
-            initialDelaySeconds: 30
-            periodSeconds: 10
+#          livenessProbe:
+#            exec:
+#              command:
+#                - /bin/sh
+#                - -c
+#                - >
+#                  curl --fail --silent http://localhost:8091/product/findById/100 | grep productDescription || exit 1
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#          readinessProbe:
+#            httpGet:
+#              path: /product/actuator/health
+#              port: 8091
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
