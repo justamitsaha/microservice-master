@@ -43,7 +43,7 @@ spec:
               value: "-Duser.timezone=Asia/Kolkata"
           startupProbe:
             httpGet:
-              path: /actuator/health
+              path: /identity/actuator/health
               port: 8081
             initialDelaySeconds: 30 # Wait 10 seconds before first check
             periodSeconds: 5 # Check every 5 seconds
