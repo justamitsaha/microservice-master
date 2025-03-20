@@ -37,6 +37,11 @@ spec:
                 configMapKeyRef:
                   name: microservice-master-configmap
                   key: EUREKA_HOST
+            - name: SPRING_CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: CONFIG_SERVER_URI
             - name: TZ
               value: "Asia/Kolkata"
             - name: JAVA_OPTS
