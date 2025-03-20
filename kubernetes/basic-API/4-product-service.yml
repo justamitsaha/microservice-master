@@ -52,7 +52,7 @@ spec:
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /product/configuration/api-info
+              path: /product/actuator/health
               port: 8091
             initialDelaySeconds: 30
             periodSeconds: 10
