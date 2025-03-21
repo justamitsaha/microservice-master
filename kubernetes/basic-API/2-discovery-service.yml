@@ -58,7 +58,7 @@ metadata:
 spec:
   selector:
     app: discovery-service
-  type: ClusterIP
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8081
