@@ -25,6 +25,26 @@ spec:
               value: "Asia/Kolkata"
             - name: JAVA_OPTS
               value: "-Duser.timezone=Asia/Kolkata"
+            - name: SPRING_RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_HOST
+            - name: SPRING_RABBITMQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PORT
+            - name: SPRING_RABBITMQ_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_USERNAME
+            - name: SPRING_RABBITMQ_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PASSWORD
           startupProbe:
             httpGet:
               path: /actuator/health  # Health endpoint

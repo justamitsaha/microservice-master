@@ -23,9 +23,25 @@ spec:
             - containerPort: 15672 # Management UI
           env:
             - name: RABBITMQ_DEFAULT_USER
-              value: "guest"
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_USERNAME
             - name: RABBITMQ_DEFAULT_PASS
-              value: "guest"
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PASSWORD
+            - name: RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_HOST
+            - name: RABBITMQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PORT
 ---
 apiVersion: v1
 kind: Service
@@ -36,13 +52,17 @@ spec:
   selector:
     app: rabbitmq
   ports:
-    - protocol: TCP
+    - name: amqp-port  # Name for AMQP protocol
+      protocol: TCP
       port: 5672
       targetPort: 5672
-    - protocol: TCP
+    - name: management-port  # Name for Management UI
+      protocol: TCP
       port: 15672
       targetPort: 15672
   type: ClusterIP
+
+
 
 #  5672 → AMQP protocol (for communication with services).
 #  15672 → RabbitMQ Management UI (for monitoring and management).
