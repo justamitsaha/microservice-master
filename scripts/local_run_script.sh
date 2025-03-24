@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the Docker image tag
-DOCKER_TAG="basic"
+DOCKER_TAG="config_bus_update"
 
 echo "Current Path: $(pwd)"
 

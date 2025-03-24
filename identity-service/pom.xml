@@ -112,6 +112,12 @@
             <version>1.0.2</version>
         </dependency>
 
+        <!--For auto refreshing configurations to all instances-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

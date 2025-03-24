@@ -1,0 +1,20 @@
+# Namespace Definition
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: amit
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: microservice-master-configmap
+  namespace: amit # Assigning to namespace 'amit'
+data:
+  KEYCLOAK_ADMIN_USERNAME: admin
+  KEYCLOAK_ADMIN_PASSWORD: admin
+  EUREKA_HOST: "http://discovery-service:8081/discovery/eureka/"
+  CONFIG_SERVER_URI: "optional:configserver:http://configserver:8071/"
+  RABBITMQ_HOST: "rabbitmq"
+  RABBITMQ_PORT: "5672"
+  RABBITMQ_USERNAME: "guest"
+  RABBITMQ_PASSWORD: "guest"

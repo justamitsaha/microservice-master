@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-service-deployment
+  namespace: amit
+  labels:
+    app: discovery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discovery-service
+  template:
+    metadata:
+      labels:
+        app: discovery-service
+    spec:
+      containers:
+        - name: discovery-service
+          image: justamitsaha/ms-discovery-service:basic
+          ports:
+            - containerPort: 8081
+          env:
+          - name: TZ
+            value: "Asia/Kolkata"
+          - name: JAVA_OPTS
+            value: "-Duser.timezone=Asia/Kolkata"
+#          startupProbe:
+#            httpGet:
+#              path: /discovery/actuator/health
+#              port: 8081
+#            initialDelaySeconds: 30 # Wait 10 seconds before first check
+#            periodSeconds: 5 # Check every 5 seconds
+#            failureThreshold: 6 # Fail after 6 unsuccessful checks
+#
+#          livenessProbe:
+#            exec:
+#              command:
+#                - /bin/sh
+#                - -c
+#                - >
+#                  curl --fail --silent localhost:8081/discovery/actuator/health/readiness | grep UP || exit 1
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#
+#          readinessProbe:
+#            httpGet:
+#              path: /discovery/actuator/health
+#              port: 8081
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: discovery-service # other pods in the cluster will identify this one with this field
+  namespace: amit
+spec:
+  selector:
+    app: discovery-service
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081

@@ -1,0 +1,104 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: amit-ingress
+  namespace: amit
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - pathType: ImplementationSpecific
+            path: /config(/|$)(.*)
+            backend:
+              service:
+                name: configserver
+                port:
+                  number: 8071
+          - pathType: ImplementationSpecific
+            path: /gateway(/|$)(.*)
+            backend:
+              service:
+                name: gateway-service
+                port:
+                  number: 8080
+          - pathType: ImplementationSpecific
+            path: /rabbit(/|$)(.*)
+            backend:
+              service:
+                name: rabbitmq
+                port:
+                  number: 15672
+
+
+
+
+
+#   set up ingress process
+#   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+#   kubectl get pods -n ingress-nginx
+#   Expected output
+#   NAME                                        READY   STATUS    RESTARTS   AGE
+#   ingress-nginx-controller-7f7d6896c9-qwwxr   1/1     Running   0          1m
+
+#   Verify NGINX Service is Created
+#   kubectl get svc -n ingress-nginx
+#   Expected
+#   NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                      AGE
+#   ingress-nginx-controller             LoadBalancer   10.96.54.104    35.222.45.123     80:30971/TCP,443:30590/TCP   1m
+#   ingress-nginx-controller-admission   ClusterIP      10.96.242.154   <none>            443/TCP                      1m
+
+#   Confirm External IP is Assigned
+#   kubectl get svc -n ingress-nginx
+#   If the EXTERNAL-IP is still showing as <pending>, wait for a few minutes and recheck:
+
+#   Once the controller is ready and the EXTERNAL-IP is assigned, reapply your Ingress:
+#   kubectl apply -f /ingress-routing
+#   Get Ingress and Confirm IP
+#   kubectl get ingress -n amit
+
+
+#   <-------------Trouble shooting----------->
+#   Ensure NGINX Ingress is running:
+#   kubectl get ingress amit-ingress -n amit
+
+#   Check Ingress events if issues arise:
+#   kubectl describe ingress amit-ingress -n amit
+
+#   Check ingress logs
+#   kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx
+
+#   Check service and pod status:
+#   kubectl get svc,pods -n amit
+
+#   Check if the Ingress Controller is Running
+#   kubectl get pods -n ingress-nginx
+#   should show like below
+#   NAME                                        READY   STATUS    RESTARTS   AGE
+#   ingress-nginx-controller-7f7d6896c9-qwwxr   1/1     Running   0          30m
+
+#   If the NGINX Ingress Controller is not running, you need to install it:
+#   kubectl delete ingress amit-ingress -n amit
+#   Check if Ingress Controller is Installed
+#   kubectl get pods -n ingress-nginx
+#   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+
+#   Verify Service Type for Ingress Controller
+#   kubectl get svc -n ingress-nginx
+#   NAME                                 TYPE           CLUSTER-IP     EXTERNAL-IP       PORT(S)                      AGE
+#   ingress-nginx-controller             LoadBalancer   10.96.54.104   35.222.45.123     80:30971/TCP,443:30590/TCP   30m
+#   ingress-nginx-controller-admission   ClusterIP      10.96.242.154  <none>            443/TCP                      30m
+#   Ensure that the ingress-nginx-controller service is of type LoadBalancer.
+#   The EXTERNAL-IP should show an IP like 35.xxx.xxx.xxx.
+
+#👉 If EXTERNAL-IP is <pending>: check for events
+#   kubectl describe svc ingress-nginx-controller -n ingress-nginx
+
+#   If you still don’t get an IP, try patching the service:
+#   kubectl patch svc ingress-nginx-controller -n ingress-nginx -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+#   After a couple of minutes, check if the Ingress gets an IP:
+
+

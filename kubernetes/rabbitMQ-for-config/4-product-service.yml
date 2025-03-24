@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service-deployment
+  namespace: amit
+  labels:
+    app: product-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      initContainers:
+        - name: wait-for-identity-service
+          image: appropriate/curl:latest
+          command:
+            - /bin/sh
+            - -c
+            - >
+              until curl --fail --silent http://gateway-service:8080/authentication/user/findById/1 | grep 'Amit'; do
+                echo "Waiting for identity-service to be UP";
+                sleep 20;
+              done;
+      containers:
+        - name: product-service
+          image: justamitsaha/ms-product-service:basic
+          ports:
+            - containerPort: 8091
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: EUREKA_HOST
+            - name: SPRING_CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: CONFIG_SERVER_URI
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: JAVA_OPTS
+              value: "-Duser.timezone=Asia/Kolkata"
+#          livenessProbe:
+#            exec:
+#              command:
+#                - /bin/sh
+#                - -c
+#                - >
+#                  curl --fail --silent http://localhost:8091/product/findById/100 | grep productDescription || exit 1
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#          readinessProbe:
+#            httpGet:
+#              path: /product/actuator/health
+#              port: 8091
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+  namespace: amit
+spec:
+  selector:
+    app: product-service
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8091
+      targetPort: 8091
