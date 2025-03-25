@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("user")
@@ -178,7 +182,6 @@ public class UserController {
                                                                String email) {
         log.info("Inside findByEmailContaining ");
         throw new RuntimeException();
-        //return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
     }
 
     @GetMapping("findUsersWithMailPreference/{email}")
@@ -203,6 +206,37 @@ public class UserController {
     public ResponseEntity<List<UserDto>> findByEmailContainingFallback(String email, Throwable throwable) {
         log.info("Inside findByEmailContainingFallback  ");
         return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmailContaining(email));
+    }
+
+
+    @GetMapping("resiliencyDummy/{count}")
+    public CompletableFuture<ResponseEntity<String>> dummyExceptionMethod(@PathVariable int count) throws InterruptedException {
+        log.info("Inside dummyExceptionMethod");
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        CompletableFuture<ResponseEntity<String>> future;
+        switch (count) {
+            case 1 -> {
+                future = new CompletableFuture<>();
+                scheduler.schedule(() -> {
+                    future.completeExceptionally(new RuntimeException("Request failed after 3 seconds"));
+                }, 1, TimeUnit.SECONDS);
+                return future;
+            }
+            case 2 -> {
+                future = new CompletableFuture<>();
+                scheduler.schedule(() -> {
+                    future.complete(ResponseEntity.ok("Response delayed by 5 seconds"));
+                }, 5, TimeUnit.SECONDS);
+                return future;
+            }
+            default -> {
+                future = new CompletableFuture<>();
+                scheduler.schedule(() -> {
+                    future.complete(ResponseEntity.ok("No Delay"));
+                }, 0, TimeUnit.SECONDS);
+                return future;
+            }
+        }
     }
 
 
