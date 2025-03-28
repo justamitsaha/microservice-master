@@ -19,11 +19,12 @@ public class RoutingConfiguration {
                         .path("/auth/**")
                         .filters(gatewayFilterSpec -> gatewayFilterSpec
                                 .rewritePath("/auth/(?<segment>.*)", "/identity/${segment}")
-                                .circuitBreaker(config -> config.setName("identity-circuit-breaker")
-                                        .setFallbackUri("forward:/product/configuration/contact-info"))
-                                .retry(retryConfig -> retryConfig.setRetries(3)
-                                        .setMethods(HttpMethod.GET)
-                                        .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
+                                .circuitBreaker(config -> config.setName("identity-circuit-breaker")))
+//                                .circuitBreaker(config -> config.setName("identity-circuit-breaker")
+//                                        .setFallbackUri("forward:/auth/configuration/contact-info"))
+//                                .retry(retryConfig -> retryConfig.setRetries(3)
+//                                        .setMethods(HttpMethod.GET)
+//                                        .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
                         .uri("lb://IDENTITY-SERVICE"))
                 .route(p -> p
                         .path("/product/configuration/**")

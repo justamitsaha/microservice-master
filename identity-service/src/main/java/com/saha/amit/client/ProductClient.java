@@ -24,17 +24,12 @@ public class ProductClient {
 
     public CompanyContactInfoDto getContactInfo() {
         log.info("getContactInfo webclient "+productEndpoint + "contact-info");
-        try {
             return webBuilder.build().
                     get()
                     .uri(productEndpoint + "contact-info")
                     .retrieve()
                     .bodyToMono(CompanyContactInfoDto.class)
                     .block();
-        } catch (Exception e) {
-            log.error("Error in webclient getContactInfo --> " + e);
-        }
-        return null;
     }
 
     public List<ProductDto> findByUserId(int userId) {

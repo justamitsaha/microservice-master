@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: loki
+  namespace: amit
+spec:
+  serviceName: loki
+  replicas: 3
+  selector:
+    matchLabels:
+      app: loki
+  template:
+    metadata:
+      labels:
+        app: loki
+    spec:
+      containers:
+        - name: loki
+          image: grafana/loki:3.0.0
+          args:
+            - -config.file=/etc/loki/config.yaml
+          ports:
+            - name: http
+              containerPort: 3100
+            - name: gossip
+              containerPort: 7946
+          volumeMounts:
+            - name: config
+              mountPath: /etc/loki/config.yaml   # Correct path to the file
+              subPath: loki-config.yaml         # Use subPath to refer to the ConfigMap key
+      volumes:
+        - name: config
+          configMap:
+            name: loki-config
