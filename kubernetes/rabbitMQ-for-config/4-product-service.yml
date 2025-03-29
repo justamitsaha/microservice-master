@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: product-service-deployment
-  namespace: amit
+#  namespace: amit
   labels:
     app: product-service
 spec:
@@ -66,7 +66,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: product-service
-  namespace: amit
+#  namespace: amit
 spec:
   selector:
     app: product-service

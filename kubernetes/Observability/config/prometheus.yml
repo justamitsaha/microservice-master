@@ -10,26 +10,22 @@ data:
       evaluation_interval: 5s
 
     scrape_configs:
-      - job_name: 'accounts'
+      - job_name: 'identity-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: [ 'accounts:8080' ]
-      - job_name: 'loans'
+          - targets: [ 'identity-service:8090' ]
+      - job_name: 'product-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: [ 'loans:8090' ]
-      - job_name: 'cards'
+          - targets: [ 'product-service:8091' ]
+      - job_name: 'gateway-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: [ 'cards:9000' ]
-      - job_name: 'gatewayserver'
+          - targets: [ 'gateway-service:8080' ]
+      - job_name: 'discovery-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: [ 'gatewayserver:8072' ]
-      - job_name: 'eurekaserver'
-        metrics_path: '/actuator/prometheus'
-        static_configs:
-          - targets: [ 'eurekaserver:8070' ]
+          - targets: [ 'discovery-service:8081' ]
       - job_name: 'configserver'
         metrics_path: '/actuator/prometheus'
         static_configs:
