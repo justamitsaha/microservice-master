@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configserver-deployment
+#  namespace: amit
+  labels:
+    app: configserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configserver
+  template:
+    metadata:
+      labels:
+        app: configserver
+    spec:
+      containers:
+        - name: configserver
+          image: justamitsaha/ms-config-server:config_bus_update
+          ports:
+            - containerPort: 8071
+          env:
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: JAVA_OPTS
+              value: "-Duser.timezone=Asia/Kolkata"
+            - name: SPRING_RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_HOST
+            - name: SPRING_RABBITMQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PORT
+            - name: SPRING_RABBITMQ_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_USERNAME
+            - name: SPRING_RABBITMQ_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PASSWORD
+            - name: JAVA_TOOL_OPTIONS
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: JAVA_TOOL_OPTIONS
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: OTEL_EXPORTER_OTLP_ENDPOINT
+            - name: OTEL_METRICS_EXPORTER
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: OTEL_METRICS_EXPORTER
+            - name: OTEL_SERVICE_NAME
+              value: config-server
+          startupProbe:
+            httpGet:
+              path: /actuator/health  # Health endpoint
+              port: 8071              # Correct port
+            failureThreshold: 30      # Allow up to 30 failures (5 minutes with 10s period)
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health  # Or any health endpoint your app exposes
+              port: 8071              # Correct port
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health  # Health endpoint
+              port: 8071
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: configserver
+#  namespace: amit
+spec:
+  selector:
+    app: configserver
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8071
+      targetPort: 8071

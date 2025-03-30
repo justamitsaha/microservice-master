@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the Docker image tag
-DOCKER_TAG="config_bus_update2"
+DOCKER_TAG="observability"
 
 echo "Current Path: $(pwd)"
 

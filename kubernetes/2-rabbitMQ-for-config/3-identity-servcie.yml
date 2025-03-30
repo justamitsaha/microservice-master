@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-service-deployment
+#  namespace: amit
+  labels:
+    app: identity-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-service
+  template:
+    metadata:
+      labels:
+        app: identity-service
+    spec:
+      initContainers:
+        - name: wait-for-discovery-service
+          image: appropriate/curl:latest
+          command:
+            - /bin/sh
+            - -c
+            - >
+              until curl --fail --silent http://discovery-service:8081/discovery/actuator/health | grep '"status":"UP"'; do
+                echo "Waiting for discovery-service to be UP";
+                sleep 5;
+              done
+      containers:
+        - name: identity-service
+          image: justamitsaha/ms-identity-service:config_bus_update2
+          ports:
+            - containerPort: 8090
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: EUREKA_HOST
+            - name: SPRING_CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: CONFIG_SERVER_URI
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: JAVA_OPTS
+              value: "-Duser.timezone=Asia/Kolkata"
+            - name: SPRING_RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_HOST
+            - name: SPRING_RABBITMQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PORT
+            - name: SPRING_RABBITMQ_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_USERNAME
+            - name: SPRING_RABBITMQ_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-master-configmap
+                  key: RABBITMQ_PASSWORD
+#          startupProbe:
+#            httpGet:
+#              path: /identity/actuator/health
+#              port: 8090
+#            initialDelaySeconds: 30 # Wait 10 seconds before first check
+#            periodSeconds: 5 # Check every 5 seconds
+#            failureThreshold: 6 # Fail after 6 unsuccessful checks
+#
+#          livenessProbe:
+#            exec:
+#              command:
+#                - /bin/sh
+#                - -c
+#                - >
+#                  curl --fail --silent http://localhost:8090/identity/user/findById/1 | grep Amit || exit 1
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#
+#          readinessProbe:
+#            httpGet:
+#              path: /identity/actuator/health
+#              port: 8090
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: identity-service # other pods in the cluster will identify this one with this field
+#  namespace: amit
+spec:
+  selector:
+    app: identity-service
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090
+
+
+#Check if the identity-service deployment is picking the correct environment variable:
+#      kubectl describe pod <identity-service-pod-name> -n amit
+
+# Check if the environment variable is set correctly inside the pod:
+# kubectl exec -it identity-service-deployment-57d5849f6-4kcjc -n amit -- printenv | grep SPRING_CONFIG_IMPORT
+
