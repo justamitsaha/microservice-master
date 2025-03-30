@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: discovery-service
-          image: justamitsaha/ms-discovery-service:basic
+          image: justamitsaha/ms-discovery-service:observability
           ports:
             - containerPort: 8081
           env:

@@ -28,7 +28,7 @@ spec:
               done
       containers:
         - name: identity-service
-          image: justamitsaha/ms-identity-service:config_bus_update2
+          image: justamitsaha/ms-identity-service:observability
           ports:
             - containerPort: 8090
           env:

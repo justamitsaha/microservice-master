@@ -28,7 +28,7 @@ spec:
               done;
       containers:
         - name: product-service
-          image: justamitsaha/ms-product-service:basic
+          image: justamitsaha/ms-product-service:observability
           ports:
             - containerPort: 8091
           env:

@@ -28,7 +28,7 @@ spec:
               done
       containers:
         - name: gateway-service
-          image: justamitsaha/ms-gateway-service:basic
+          image: justamitsaha/ms-gateway-service:observability
           ports:
             - containerPort: 8080
           env:

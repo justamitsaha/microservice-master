@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: configserver
-          image: justamitsaha/ms-config-server:config_bus_update
+          image: justamitsaha/ms-config-server:observability
           ports:
             - containerPort: 8071
           env:
