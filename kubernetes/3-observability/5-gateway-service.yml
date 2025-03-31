@@ -26,11 +26,24 @@ spec:
                 echo "Waiting for discovery-service to be UP";
                 sleep 5;
               done
+
+        - name: init-opentelemetry
+          image: curlimages/curl:latest
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - curl -L -o /app/libs/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.32.0/opentelemetry-javaagent.jar
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /app/libs
+
       containers:
         - name: gateway-service
           image: justamitsaha/ms-gateway-service:observability
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /app/libs   # open telemetry  will be loaded at this path by init container
           env:
             - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
               valueFrom:
@@ -62,6 +75,7 @@ spec:
             httpGet:
               path: /actuator/health  # Health endpoint
               port: 8080              # Correct port
+            initialDelaySeconds: 60 # Wait 60 seconds before first check
             failureThreshold: 30      # Allow up to 30 failures (5 minutes with 10s period)
             periodSeconds: 10
           livenessProbe:
@@ -76,6 +90,10 @@ spec:
               port: 8080
             initialDelaySeconds: 40
             periodSeconds: 10
+
+      volumes:
+        - name: otel-agent
+          emptyDir: {}
 
 ---
 apiVersion: v1

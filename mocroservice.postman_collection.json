@@ -7,382 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Local-Server",
-			"item": [
-				{
-					"name": "Identity-service",
-					"item": [
-						{
-							"name": "User_create",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev007@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/user/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"user",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_user_by_id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/user/findById/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"user",
-										"findById",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_user_by_email",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/user/findByEmailContaining/007@mailinator.com",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"user",
-										"findByEmailContaining",
-										"007@mailinator.com"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_user_By_PhoneNumber",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/user/findByPhoneNumberContaining?phoneNumber=999999999",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"user",
-										"findByPhoneNumberContaining"
-									],
-									"query": [
-										{
-											"key": "phoneNumber",
-											"value": "999999999"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Product-Service",
-					"item": [
-						{
-							"name": "Configuration-service",
-							"item": [
-								{
-									"name": "Configuration-API-info",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://localhost:8081/configuration/api-info",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8081",
-											"path": [
-												"configuration",
-												"api-info"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Configuration-enviornment",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://localhost:8081/configuration/env-variables",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8081",
-											"path": [
-												"configuration",
-												"env-variables"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Configuration-Contact-class",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://localhost:8081/configuration/contact-info",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8081",
-											"path": [
-												"configuration",
-												"contact-info"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "SaveProduct",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "userId",
-										"value": "1"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8081/product/save",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"product",
-										"save"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Search_product_by_price",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8081/product/search/2000/5000",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"product",
-										"search",
-										"2000",
-										"5000"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_producyt_by_id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8081/product/findById/101",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"product",
-										"findById",
-										"101"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Actuator",
-					"item": [
-						{
-							"name": "Actuator-ConfigServer",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8071/actuator/refresh",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8071",
-									"path": [
-										"actuator",
-										"refresh"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Actuator-Product",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8081/actuator/refresh",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"actuator",
-										"refresh"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "ConfigServer",
-					"item": [
-						{
-							"name": "Config-Get_properties",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8071/product-service/default",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8071",
-									"path": [
-										"product-service",
-										"default"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Encrypt",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "johns@mailinator.com",
-									"options": {
-										"raw": {
-											"language": "text"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8071/encrypt",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8071",
-									"path": [
-										"encrypt"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
 			"name": "Local-Server-ApiGateway",
 			"item": [
 				{
@@ -456,12 +80,58 @@
 									"response": []
 								},
 								{
-									"name": "New Request",
+									"name": "PodInfo",
 									"request": {
 										"method": "GET",
-										"header": []
+										"header": [],
+										"url": {
+											"raw": "/auth/configuration/pod-info",
+											"path": [
+												"auth",
+												"configuration",
+												"pod-info"
+											]
+										}
 									},
 									"response": []
+								},
+								{
+									"name": "Bus_refresh",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "/authentication/actuator/busrefresh",
+											"path": [
+												"authentication",
+												"actuator",
+												"busrefresh"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
 								}
 							]
 						},
@@ -513,9 +183,9 @@
 									}
 								},
 								"url": {
-									"raw": "/authentication/user/findById/4",
+									"raw": "/auth/user/findById/4",
 									"path": [
-										"authentication",
+										"auth",
 										"user",
 										"findById",
 										"4"
@@ -628,12 +298,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/auth/user/findByEmailContaining/007@mailinator.com",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
+									"raw": "/auth/user/findByEmailContaining/007@mailinator.com",
 									"path": [
 										"auth",
 										"user",
@@ -686,28 +351,6 @@
 									"path": [
 										"authentication",
 										"user"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get_user_contact_info",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/authentication/user/getUserContactInfo/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"authentication",
-										"user",
-										"getUserContactInfo",
-										"2"
 									]
 								}
 							},
@@ -1153,6 +796,21 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Bus_refresh",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "/actuator/busrefresh",
+									"path": [
+										"actuator",
+										"busrefresh"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [
@@ -1162,7 +820,13 @@
 								"type": "text/javascript",
 								"packages": {},
 								"exec": [
-									"pm.request.url.port=\"8071\""
+									"// pm.request.url.protocol=\"http\"\r",
+									"// pm.request.url.host=\"192.168.0.143\"\r",
+									"// pm.request.url.host=\"me.amit.com/config\"\r",
+									"// pm.request.url.host=\"34.56.195.171\"\r",
+									"// pm.request.url.port=\"80\"\r",
+									"pm.request.url.host = \"34.68.59.88/config\";\r",
+									""
 								]
 							}
 						},
@@ -1222,6 +886,90 @@
 											"key": "name",
 											"value": "identity-circuit-breaker"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CircuitBreakerDemo",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "/auth/user/resiliencyDummy/1",
+									"path": [
+										"auth",
+										"user",
+										"resiliencyDummy",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Resiliency_Feign_client",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/authentication/user/getUserContactInfo/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authentication",
+										"user",
+										"getUserContactInfo",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retry",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/product/configuration/retry",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"configuration",
+										"retry"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retry Fallback",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/product/configuration/retryWithFallback",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"configuration",
+										"retryWithFallback"
 									]
 								}
 							},
@@ -1367,10 +1115,17 @@
 						"packages": {},
 						"exec": [
 							"pm.request.url.protocol=\"http\"\r",
+							"\r",
+							"// pm.request.url.host=\"localhost\"\r",
+							"// pm.request.url.port=\"8080\"\r",
+							"\r",
 							"// pm.request.url.host=\"192.168.0.143\"\r",
-							"pm.request.url.host=\"localhost\"\r",
-							"// pm.request.url.host=\"34.56.195.171\"\r",
-							"pm.request.url.port=\"8080\"\r",
+							"// pm.request.url.host=\"amit.com/api\"\r",
+							"// pm.request.url.port=\"31233\"\r",
+							"// pm.request.url.port=\"80\"\r",
+							"\r",
+							"pm.request.url.host = \"104.197.74.200/gateway\";\r",
+							"\r",
 							""
 						]
 					}
@@ -1384,419 +1139,6 @@
 							""
 						]
 					}
-				}
-			]
-		},
-		{
-			"name": "Local-Server-ApiGateway-Desktop",
-			"item": [
-				{
-					"name": "Identity-service",
-					"item": [
-						{
-							"name": "User_create",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev007@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://192.168.0.143:8080/authentication/user/create",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"0",
-										"143"
-									],
-									"port": "8080",
-									"path": [
-										"authentication",
-										"user",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_user_by_id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://192.168.0.143:8080/authentication/user/findById/5",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"0",
-										"143"
-									],
-									"port": "8080",
-									"path": [
-										"authentication",
-										"user",
-										"findById",
-										"5"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_user_by_email",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Guest\",\r\n  \"email\": \"helloDev@mailinator.com\",\r\n  \"phoneNumber\": \"9999999911\",\r\n  \"password\": \"hellBoy\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://192.168.0.143:8080/auth/user/findByEmailContaining/007@mailinator.com",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"0",
-										"143"
-									],
-									"port": "8080",
-									"path": [
-										"auth",
-										"user",
-										"findByEmailContaining",
-										"007@mailinator.com"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_user_By_PhoneNumber",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://192.168.0.143:8080/authentication/user/findByPhoneNumberContaining?phoneNumber=999999999",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"0",
-										"143"
-									],
-									"port": "8080",
-									"path": [
-										"authentication",
-										"user",
-										"findByPhoneNumberContaining"
-									],
-									"query": [
-										{
-											"key": "phoneNumber",
-											"value": "999999999"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Product-Service",
-					"item": [
-						{
-							"name": "Configuration-service",
-							"item": [
-								{
-									"name": "Configuration-API-info",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://192.168.0.143:8080/product/configuration/api-info",
-											"protocol": "http",
-											"host": [
-												"192",
-												"168",
-												"0",
-												"143"
-											],
-											"port": "8080",
-											"path": [
-												"product",
-												"configuration",
-												"api-info"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Configuration-enviornment",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://192.168.0.143:8080/product/configuration/env-variables",
-											"protocol": "http",
-											"host": [
-												"192",
-												"168",
-												"0",
-												"143"
-											],
-											"port": "8080",
-											"path": [
-												"product",
-												"configuration",
-												"env-variables"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Configuration-Contact-class",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://192.168.0.143:8080/product/configuration/contact-info",
-											"protocol": "http",
-											"host": [
-												"192",
-												"168",
-												"0",
-												"143"
-											],
-											"port": "8080",
-											"path": [
-												"product",
-												"configuration",
-												"contact-info"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "SaveProduct",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "userId",
-										"value": "1"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"productDescription\": \"best Phone\",\r\n    \"price\": 20000,\r\n    \"productName\": \"iPhone\",\r\n    \"category\": \"electronics\",\r\n    \"imagePath\":\"hjfh\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://192.168.0.143:8080/product/save",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"0",
-										"143"
-									],
-									"port": "8080",
-									"path": [
-										"product",
-										"save"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Search_product_by_price",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://192.168.0.143:8080/product/search/2000/5000",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"0",
-										"143"
-									],
-									"port": "8080",
-									"path": [
-										"product",
-										"search",
-										"2000",
-										"5000"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find_producyt_by_id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://192.168.0.143:8080/product/findById/100",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"0",
-										"143"
-									],
-									"port": "8080",
-									"path": [
-										"product",
-										"findById",
-										"100"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Actuator",
-					"item": [
-						{
-							"name": "Actuator-ConfigServer",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8071/actuator/refresh",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8071",
-									"path": [
-										"actuator",
-										"refresh"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Actuator-Product",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8081/actuator/refresh",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"actuator",
-										"refresh"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "ConfigServer",
-					"item": [
-						{
-							"name": "Config-Get_properties",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8071/product-service/default",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8071",
-									"path": [
-										"product-service",
-										"default"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Encrypt",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "johns@mailinator.com",
-									"options": {
-										"raw": {
-											"language": "text"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8071/encrypt",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8071",
-									"path": [
-										"encrypt"
-									]
-								}
-							},
-							"response": []
-						}
-					]
 				}
 			]
 		},

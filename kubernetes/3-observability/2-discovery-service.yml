@@ -15,11 +15,23 @@ spec:
       labels:
         app: discovery-service
     spec:
+      initContainers:
+        - name: init-opentelemetry
+          image: curlimages/curl:latest
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - curl -L -o /app/libs/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.32.0/opentelemetry-javaagent.jar
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /app/libs
       containers:
         - name: discovery-service
           image: justamitsaha/ms-discovery-service:observability
           ports:
             - containerPort: 8081
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /app/libs   # open telemetry  will be loaded at this path by init container
           env:
           - name: TZ
             value: "Asia/Kolkata"
@@ -42,30 +54,35 @@ spec:
                 key: OTEL_METRICS_EXPORTER
           - name: OTEL_SERVICE_NAME
             value: discovery-service
-#          startupProbe:
-#            httpGet:
-#              path: /discovery/actuator/health
-#              port: 8081
-#            initialDelaySeconds: 30 # Wait 10 seconds before first check
-#            periodSeconds: 5 # Check every 5 seconds
-#            failureThreshold: 6 # Fail after 6 unsuccessful checks
-#
-#          livenessProbe:
-#            exec:
-#              command:
-#                - /bin/sh
-#                - -c
-#                - >
-#                  curl --fail --silent localhost:8081/discovery/actuator/health/readiness | grep UP || exit 1
-#            initialDelaySeconds: 30
-#            periodSeconds: 10
-#
-#          readinessProbe:
-#            httpGet:
-#              path: /discovery/actuator/health
-#              port: 8081
-#            initialDelaySeconds: 30
-#            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /discovery/actuator/health
+              port: 8081
+            initialDelaySeconds: 60 # Wait 10 seconds before first check
+            periodSeconds: 10 # Check every 5 seconds
+            failureThreshold: 10 # Fail after 6 unsuccessful checks
+
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - >
+                  curl --fail --silent localhost:8081/discovery/actuator/health/readiness | grep UP || exit 1
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /discovery/actuator/health
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+      volumes:
+        - name: otel-agent
+          emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service

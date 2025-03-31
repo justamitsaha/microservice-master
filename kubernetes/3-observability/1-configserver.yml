@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: configserver-deployment
-#  namespace: amit
+  #  namespace: amit
   labels:
     app: configserver
 spec:
@@ -15,6 +15,15 @@ spec:
       labels:
         app: configserver
     spec:
+      initContainers:
+        - name: init-opentelemetry
+          image: curlimages/curl:latest
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - curl -L -o /app/libs/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.32.0/opentelemetry-javaagent.jar
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /app/libs
       containers:
         - name: configserver
           image: justamitsaha/ms-config-server:observability
@@ -62,24 +71,32 @@ spec:
                   key: OTEL_METRICS_EXPORTER
             - name: OTEL_SERVICE_NAME
               value: config-server
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /app/libs   # open telemetry  will be loaded at this path by init container
           startupProbe:
             httpGet:
-              path: /actuator/health  # Health endpoint
-              port: 8071              # Correct port
-            failureThreshold: 30      # Allow up to 30 failures (5 minutes with 10s period)
+              path: /actuator/health
+              port: 8071
+            initialDelaySeconds: 60
+            failureThreshold: 10
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /actuator/health  # Or any health endpoint your app exposes
-              port: 8071              # Correct port
-            initialDelaySeconds: 30
-            periodSeconds: 10
+              path: /actuator/health
+              port: 8071
+            initialDelaySeconds: 60
+            periodSeconds: 15
           readinessProbe:
             httpGet:
-              path: /actuator/health  # Health endpoint
+              path: /actuator/health
               port: 8071
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 60
+            periodSeconds: 15
+
+      volumes:
+        - name: otel-agent
+          emptyDir: {}
 
 ---
 apiVersion: v1
