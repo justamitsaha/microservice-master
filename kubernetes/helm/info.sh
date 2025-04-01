@@ -27,7 +27,10 @@ helm dependencies build
 cd ../
 helm install grafana grafana
 
+
 echo "Browse to http://127.0.0.1:8080"
 kubectl port-forward svc/grafana 3000:3000
 
 echo "Password: $(kubectl get secret grafana-admin --namespace default -o jsonpath="{.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 -d)"
+
+helm uninstall grafana

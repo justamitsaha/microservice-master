@@ -16,6 +16,26 @@ gcloud container clusters create amit-cluster \
   --no-enable-autoscaling \
   --tags=gke-node
 
+gcloud container clusters create amit-cluster2 \
+  --zone us-east1-b \
+  --num-nodes 3 \
+  --machine-type e2-standard-2 \
+  --enable-ip-alias \
+  --no-enable-autoscaling \
+  --tags=gke-node
+
+#scale down
+gcloud container clusters resize amit-cluster2 \
+  --zone us-east1-b \
+  --num-nodes 0
+#scale up
+gcloud container clusters resize amit-cluster \
+  --zone us-central1-a \
+  --num-nodes 3
+
+
+
+
 # fire wall change for allowing any node port service
 gcloud compute firewall-rules create allow-nodeport-service \
   --allow tcp:31233 \
@@ -23,8 +43,20 @@ gcloud compute firewall-rules create allow-nodeport-service \
   --source-ranges 0.0.0.0/0 \
   --description "Allow external access to NodePort services"
 
+
+#clean up
+kubectl delete all --all -n default
+kubectl delete pvc --all -A
+kubectl delete pv --all
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+kubectl delete configmap --all -n default
+kubectl delete secret --all -n default
+kubectl get ns
+kubectl delete ns <namespace>
+
 # delete clusters
 gcloud container clusters delete amit-cluster --zone us-central1-a
+gcloud container clusters delete amit-cluster2 --zone us-east1-b
 
 kubectl apply -f
 kubectl delete -f
