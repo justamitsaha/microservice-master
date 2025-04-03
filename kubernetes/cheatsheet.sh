@@ -76,3 +76,10 @@ kubectl logs discovery-service-deployment-54cbcb7444-dnwvm -n amit
 kubectl get events -n amit | grep gateway-service-deployment
 #interact with a container
 kubectl exec -it -n amit deploy/identity-service-deployment -- /bin/sh
+
+docker run -d -p 8080:8080 \
+  -e KC_BOOTSTRAP_ADMIN_USERNAME=admin \
+  -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
+  -e KC_PROXY=edge \
+  quay.io/keycloak/keycloak:26.1.4 start-dev
+
